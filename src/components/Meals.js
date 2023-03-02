@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import Header from './Header';
+// import Drinks from '../pages/Drinks';
 
-import Header from '../components/Header';
-
-function Drinks({ match }) {
+function Meals({ match }) {
   const history = useHistory();
   const page = history.location.pathname;
 
@@ -12,7 +12,7 @@ function Drinks({ match }) {
     <div>
       <Header name={ match.path } />
       {
-        (page.pathname === '/drinks') && <Drinks />
+        (page.pathname === '/meals') && <Meals />
       }
       <img
         src="/images/searchIcon.svg"
@@ -23,10 +23,10 @@ function Drinks({ match }) {
   );
 }
 
-Drinks.propTypes = {
+Meals.propTypes = {
   match: PropTypes.shape({
     path: PropTypes.string,
   }).isRequired,
 };
 
-export default Drinks;
+export default Meals;
