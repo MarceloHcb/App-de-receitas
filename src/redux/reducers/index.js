@@ -1,7 +1,9 @@
-import { combineReducers } from 'redux';
-import { user } from './user';
-import { wallet } from './wallet';
+import React from 'react';
 
-const rootReducer = combineReducers({ user, wallet });
+function index() {
+  return (
+    <div>index</div>
+  );
+}
 
-export default rootReducer;
+export default index;
