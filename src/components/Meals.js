@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import Header from './Header';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 
 function Meals({ match }) {
   const [showBar, setShowBar] = useState(false);
@@ -26,11 +27,18 @@ function Meals({ match }) {
         />
       </button>
       {
-        showBar && <input
-          type="text"
-          placeholder="Busque"
-          data-testid="search-input"
-        />
+        showBar
+        && (
+          <>
+            <input
+              type="text"
+              placeholder="Busque"
+              data-testid="search-input"
+            />
+            <SearchBar />
+
+          </>)
+
       }
 
     </div>
