@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import Header from './Header';
 import searchIcon from '../images/searchIcon.svg';
 
 function Meals({ match }) {
+  const [showBar, setShowBar] = useState(false);
+
   const history = useHistory();
   const page = history.location.pathname;
 
@@ -14,14 +16,22 @@ function Meals({ match }) {
       {
         (page.pathname === '/meals') && <Meals />
       }
-      <button>
+      <button
+        onClick={ () => setShowBar(!showBar) }
+      >
         <img
           src={ searchIcon }
           alt=""
           data-testid="search-top-btn"
         />
-
       </button>
+      {
+        showBar && <input
+          type="text"
+          placeholder="Busque"
+          data-testid="search-input"
+        />
+      }
 
     </div>
   );
