@@ -5,10 +5,15 @@ import Header from './Header';
 
 export default function Profile() {
   const history = useHistory();
+
+  const { email } = JSON.parse(localStorage.getItem('user'));
+
   return (
     <div>
       <Header />
-      <p data-testid="profile-email" />
+      <p data-testid="profile-email">
+        { email }
+      </p>
       <button
         type="button"
         data-testid="profile-done-btn"
