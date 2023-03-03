@@ -8,6 +8,11 @@ export default function Profile() {
 
   const { email } = JSON.parse(localStorage.getItem('user'));
 
+  const handleLogout = () => {
+    localStorage.clear();
+    history.push('/');
+  };
+
   return (
     <div>
       <Header />
@@ -28,7 +33,13 @@ export default function Profile() {
       >
         Favorite Recipes
       </button>
-      <button type="button" data-testid="profile-logout-btn">Logout</button>
+      <button
+        type="button"
+        data-testid="profile-logout-btn"
+        onClick={ () => handleLogout() }
+      >
+        Logout
+      </button>
       <Footer />
     </div>
   );
