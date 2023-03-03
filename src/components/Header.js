@@ -1,18 +1,24 @@
-import React from 'react';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
-// import SearchBar from './SearchBar';
+import SearchBar from './SearchBar';
+import searchIcon from '../images/searchIcon.svg';
 
-function Header() {
+function Header({ search }) {
+  console.log(search);
   const history = useHistory();
-
-  // const [inputSearch, setInputSearch] = useState('');
+  const [showBar, setShowBar] = useState(false);
+  const [inputSearch, setInputSearch] = useState('');
+  const [conditional, setConditional] = useState(false);
 
   const page = history.location.pathname;
   const pageTitle = page === '/' ? '' : page.replace('/', '');
 
   const handleClickToProfile = () => {
     history.push('/profile');
+    setConditional(true);
+    return conditional;
   };
 
   return (
@@ -23,6 +29,7 @@ function Header() {
         }
       </h1>
       <button
+        type="button"
         onClick={ handleClickToProfile }
       >
         <img
@@ -31,18 +38,41 @@ function Header() {
           data-testid="profile-top-btn"
         />
       </button>
-      {/* {search && (
-        <form> */}
-      {/* <SearchBar inputSearch={ inputSearch } />
-          <input
-            data-testid="search-input"
-            placeholder="digite aqui"
-            value={ inputSearch }
-            onChange={ ({ target }) => setInputSearch(target.value) }
-          /> */}
-      {/* </form>
-      )} */}
+      {search
+      && (
+        <button
+          type="button"
+          onClick={ () => setShowBar(!showBar) }
+        >
+          <img
+            data-testid="search-top-btn"
+            src={ searchIcon }
+            alt="Search Icon"
+          />
+        </button>
+      )}
+      {
+        showBar
+        && (
+          <>
+            <input
+              type="text"
+              placeholder="Busque"
+              value={ inputSearch }
+              data-testid="search-input"
+              onChange={ ({ target }) => setInputSearch(target.value) }
+            />
+
+            <SearchBar inputSearch={ inputSearch } />
+
+          </>)
+
+      }
     </header>
   );
 }
+
+Header.propTypes = {
+  search: PropTypes.string.isRequired,
+};
 export default Header;
