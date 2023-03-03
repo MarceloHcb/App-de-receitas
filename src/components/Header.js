@@ -6,7 +6,6 @@ import SearchBar from './SearchBar';
 import searchIcon from '../images/searchIcon.svg';
 
 function Header({ search }) {
-  console.log(search);
   const history = useHistory();
   const [showBar, setShowBar] = useState(false);
   const [inputSearch, setInputSearch] = useState('');
@@ -14,10 +13,6 @@ function Header({ search }) {
 
   const page = history.location.pathname;
   const pageTitle = page === '/' ? '' : page.replace('/', '');
-
-  // const handleClickToProfile = () => {
-  //   history.push('/profile');
-  // };
 
   const handleClickToProfile = () => {
     history.push('/profile');
