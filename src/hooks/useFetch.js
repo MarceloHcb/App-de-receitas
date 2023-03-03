@@ -21,7 +21,7 @@ const useFetch = (url) => {
       }
     };
     fetchApi();
-  }, [url]);
+  }, [url, error]);
 
   return {
     dataApi,

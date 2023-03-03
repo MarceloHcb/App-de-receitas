@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import searchApi from '../API/API';
 
 function SearchBar({ inputSearch }) {
   const [results, setResults] = useState('');
+  const history = useHistory();
 
   const handleChange = ({ target }) => {
     const { value } = target;
@@ -11,20 +13,39 @@ function SearchBar({ inputSearch }) {
     setResults(value);
   };
 
-  const handleSearch = () => {
+  const returnedData = (data) => {
+    if (Object.keys(data).length === 1) {
+      const route = history.location.pathname;
+      if (route === '/meals') {
+        const id = data.meals[0].idMeal;
+        const redirection = `${route}/${id}`;
+        history.push(redirection);
+      } else {
+        const id = data.drinks[0].idDrink;
+        const redirection = `${route}/${id}`;
+        history.push(redirection);
+      }
+    }
+  };
+
+  const handleSearch = async (route) => {
+    let data;
     switch (results) {
     case 'Ingredient':
-      searchApi(`filter.php?i=${inputSearch}`);
+      data = await searchApi(`filter.php?i=${inputSearch}`, route);
+      returnedData(data);
       break;
     case 'Name':
-      searchApi(`search.php?s=${inputSearch}`);
+      data = await searchApi(`search.php?s=${inputSearch}`, route);
+      returnedData(data);
       break;
 
     default:
       if (inputSearch.length > 1) {
         global.alert('Your search must have only 1 (one) character');
       } else {
-        searchApi(`search.php?f=${inputSearch}`);
+        data = await searchApi(`search.php?f=${inputSearch}`, route);
+        returnedData(data);
       }
       break;
     }
@@ -32,15 +53,15 @@ function SearchBar({ inputSearch }) {
 
   return (
     <form>
-      <label htmlFor="Ingredient">
+      <label htmlFor="Ingredient" data-testid="search-top-btn">
         Ingrediente
         <input
+          data-testid="ingredient-search-radio"
           type="radio"
           name="results"
           id="Ingredient"
           value="Ingredient"
           onChange={ handleChange }
-          data-testid="ingredient-search-radio"
         />
       </label>
 
@@ -71,7 +92,7 @@ function SearchBar({ inputSearch }) {
       <button
         type="button"
         data-testid="exec-search-btn"
-        onClick={ handleSearch }
+        onClick={ () => handleSearch(history.location.pathname) }
       >
         Buscar
 
