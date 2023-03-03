@@ -53,7 +53,7 @@ function SearchBar({ inputSearch }) {
 
   return (
     <form>
-      <label htmlFor="Ingredient" data-testid="search-top-btn">
+      <label htmlFor="Ingredient">
         Ingrediente
         <input
           data-testid="ingredient-search-radio"

@@ -10,12 +10,19 @@ function Header({ search }) {
   const history = useHistory();
   const [showBar, setShowBar] = useState(false);
   const [inputSearch, setInputSearch] = useState('');
+  const [conditional, setConditional] = useState(false);
 
   const page = history.location.pathname;
   const pageTitle = page === '/' ? '' : page.replace('/', '');
 
+  // const handleClickToProfile = () => {
+  //   history.push('/profile');
+  // };
+
   const handleClickToProfile = () => {
     history.push('/profile');
+    setConditional(true);
+    return conditional;
   };
 
   return (
