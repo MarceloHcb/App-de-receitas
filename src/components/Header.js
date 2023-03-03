@@ -1,9 +1,12 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
+// import SearchBar from './SearchBar';
 
 function Header() {
   const history = useHistory();
+
+  // const [inputSearch, setInputSearch] = useState('');
 
   const page = history.location.pathname;
   const pageTitle = page === '/' ? '' : page.replace('/', '');
@@ -28,6 +31,17 @@ function Header() {
           data-testid="profile-top-btn"
         />
       </button>
+      {/* {search && (
+        <form> */}
+      {/* <SearchBar inputSearch={ inputSearch } />
+          <input
+            data-testid="search-input"
+            placeholder="digite aqui"
+            value={ inputSearch }
+            onChange={ ({ target }) => setInputSearch(target.value) }
+          /> */}
+      {/* </form>
+      )} */}
     </header>
   );
 }
