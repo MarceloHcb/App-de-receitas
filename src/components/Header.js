@@ -15,10 +15,6 @@ function Header({ search }) {
   const page = history.location.pathname;
   const pageTitle = page === '/' ? '' : page.replace('/', '');
 
-  // const handleClickToProfile = () => {
-  //   history.push('/profile');
-  // };
-
   const handleClickToProfile = () => {
     history.push('/profile');
     setConditional(true);
