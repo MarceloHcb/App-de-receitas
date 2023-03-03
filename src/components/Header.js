@@ -6,7 +6,6 @@ import SearchBar from './SearchBar';
 import searchIcon from '../images/searchIcon.svg';
 
 function Header({ search }) {
-  console.log(search);
   const history = useHistory();
   const [showBar, setShowBar] = useState(false);
   const [inputSearch, setInputSearch] = useState('');
