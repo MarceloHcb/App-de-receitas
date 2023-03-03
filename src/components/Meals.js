@@ -1,14 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import Header from './Header';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
-import Context from '../context/context';
 
 function Meals({ match }) {
   const [showBar, setShowBar] = useState(false);
-  const { handleLetterFilter } = useContext(Context);
+  const [inputSearch, setInputSearch] = useState('');
 
   const history = useHistory();
   const page = history.location.pathname;
@@ -35,10 +34,13 @@ function Meals({ match }) {
             <input
               type="text"
               placeholder="Busque"
+              value={ inputSearch }
               data-testid="search-input"
-              onChange={ ({ target }) => handleLetterFilter({ target }) }
+              onChange={ ({ target }) => setInputSearch(target.value) }
             />
-            <SearchBar />
+            <form>
+              <SearchBar inputSearch={ inputSearch } />
+            </form>
 
           </>)
 
