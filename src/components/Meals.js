@@ -38,10 +38,7 @@ function Meals({ match }) {
               data-testid="search-input"
               onChange={ ({ target }) => setInputSearch(target.value) }
             />
-            <form>
-              <SearchBar inputSearch={ inputSearch } />
-            </form>
-
+            <SearchBar inputSearch={ inputSearch } />
           </>)
 
       }
