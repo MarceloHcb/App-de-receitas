@@ -55,4 +55,3 @@ export const meals = [
     idMeal: '52814',
   },
 ];
-
