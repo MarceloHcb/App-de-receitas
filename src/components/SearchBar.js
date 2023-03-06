@@ -9,11 +9,11 @@ function SearchBar({ inputSearch }) {
 
   const handleChange = ({ target }) => {
     const { value } = target;
-
     setResults(value);
   };
 
   const returnedData = (data) => {
+    console.log(data);
     if (Object.keys(data).length === 1) {
       const route = history.location.pathname;
       if (route === '/meals') {
