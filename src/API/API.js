@@ -5,13 +5,11 @@ const searchApi = async (search, route) => {
   if (route === '/meals') {
     const response = await fetch(MEALS_URL);
     const data = await response.json();
-    console.log(data, 'meals');
     return data;
   }
 
   const response = await fetch(DRINKS_URL);
   const data = await response.json();
-  console.log(data, 'drinks');
   return data;
 };
 
