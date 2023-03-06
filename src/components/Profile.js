@@ -20,7 +20,9 @@ export default function Profile() {
     <div>
       <Header />
       <p data-testid="profile-email">
-        { emailFromLocalStorage() }
+
+        { email?.email }
+
       </p>
       <button
         type="button"
