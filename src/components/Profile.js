@@ -6,8 +6,7 @@ import Header from './Header';
 export default function Profile() {
   const history = useHistory();
 
-  const { email } = JSON.parse(localStorage.getItem('user'));
-
+  const email = JSON.parse(localStorage.getItem('user'));
   const handleLogout = () => {
     localStorage.clear();
     history.push('/');
@@ -17,7 +16,7 @@ export default function Profile() {
     <div>
       <Header />
       <p data-testid="profile-email">
-        { email }
+        { email?.email }
       </p>
       <button
         type="button"
