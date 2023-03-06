@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Profile from '../components/Profile';
 import { renderWithRouter } from '../helpers/renderWith';
@@ -6,7 +6,10 @@ import { renderWithRouter } from '../helpers/renderWith';
 describe('', () => {
   test('Verifica se os elementos estão na tela', () => {
     const { history } = renderWithRouter(<Profile search />);
-    history.push('/profile');
+
+    act(() => {
+      history.push('/profile');
+    });
 
     const ProfileH1 = screen.getByTestId('page-title');
     expect(ProfileH1).toBeInTheDocument();
@@ -25,7 +28,10 @@ describe('', () => {
   });
   test('Verifica se ao clicar no botão de receitas feitas, ele muda de tela', () => {
     const { history } = renderWithRouter(<Profile search />);
-    history.push('/profile');
+
+    act(() => {
+      history.push('/profile');
+    });
 
     const DoneRecipesBtn = screen.getByTestId('profile-done-btn');
     userEvent.click(DoneRecipesBtn);
@@ -35,7 +41,10 @@ describe('', () => {
   });
   test('Verifica se ao clicar no botão de receitas favoritas, ele muda de tela', () => {
     const { history } = renderWithRouter(<Profile search />);
-    history.push('/profile');
+
+    act(() => {
+      history.push('/profile');
+    });
 
     const favRecipesBtn = screen.getByTestId('profile-favorite-btn');
     userEvent.click(favRecipesBtn);
@@ -45,7 +54,10 @@ describe('', () => {
   });
   test('', () => {
     const { history } = renderWithRouter(<Profile search />);
-    history.push('/profile');
+
+    act(() => {
+      history.push('/profile');
+    });
 
     const logoutBtn = screen.getByTestId('profile-logout-btn');
     userEvent.click(logoutBtn);
