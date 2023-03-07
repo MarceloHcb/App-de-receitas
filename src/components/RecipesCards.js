@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import Context from '../context/Context';
-import '../css/recipes.css';
 
 function RecipesCards({ dataApi, selectedOption }) {
   const { loading } = useContext(Context);
