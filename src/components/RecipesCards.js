@@ -4,12 +4,11 @@ import { useHistory } from 'react-router-dom';
 import Context from '../context/Context';
 import '../css/recipes.css';
 
-function Recipes({ dataApi, selectedOption }) {
+function RecipesCards({ dataApi, selectedOption }) {
   const { loading } = useContext(Context);
   const history = useHistory();
   console.log(history.location);
   const pathnames = history.location.pathname;
-  console.log(pathnames);
   const max = 12;
   if (loading) {
     return (<h2>Loading...</h2>);
@@ -56,7 +55,7 @@ function Recipes({ dataApi, selectedOption }) {
   );
 }
 
-Recipes.propTypes = {
+RecipesCards.propTypes = {
   selectedOption: PropTypes.string.isRequired,
   dataApi: PropTypes.shape({
     slice: PropTypes.func,
@@ -78,4 +77,4 @@ Recipes.propTypes = {
   }).isRequired,
 };
 
-export default Recipes;
+export default RecipesCards;

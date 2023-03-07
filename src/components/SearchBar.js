@@ -9,7 +9,6 @@ function SearchBar({ inputSearch }) {
 
   const { setUrl, dataApi } = useContext(Context);
   const history = useHistory();
-
   const [results, setResults] = useState('');
   console.log(results);
   const handleChange = ({ target }) => {
