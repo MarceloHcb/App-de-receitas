@@ -4,14 +4,16 @@ import Header from './Header';
 import Footer from './Footer';
 import Context from '../context/Context';
 import RecipesCards from './RecipesCards';
+// import Recipes from './Recipes';
 
 function Meals({ match }) {
   const { dataApi, loading } = useContext(Context);
   return (
     <div>
       <Header name={ match.path } search />
-      <Footer />
       {!loading && <RecipesCards dataApi={ dataApi } selectedOption="meals" />}
+      <Footer />
+      {/* <Recipes dataApi={ dataApi } /> */}
     </div>
   );
 }

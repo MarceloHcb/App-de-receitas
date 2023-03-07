@@ -10,8 +10,8 @@ function Drink({ match }) {
   return (
     <div>
       <Header name={ match.path } search />
-      <Footer />
       {!loading && <RecipesCards dataApi={ dataApi } selectedOption="drinks" />}
+      <Footer />
     </div>
   );
 }

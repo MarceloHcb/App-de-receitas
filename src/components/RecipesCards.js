@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import Context from '../context/Context';
+import '../css/recipes.css';
 
 function RecipesCards({ dataApi, selectedOption }) {
   const { loading } = useContext(Context);
@@ -31,20 +32,20 @@ function RecipesCards({ dataApi, selectedOption }) {
   const recipes = selectedOption === 'drinks' ? dataApi?.drinks : dataApi?.meals;
 
   return (
-    <div className="meals">
+    <div className="categories">
       {recipes && recipes.slice(0, max).map((recipe, index) => (
         <div
+          className="card"
           key={ recipe === 'meals' ? recipe.idMeal : recipe.idDrink }
           data-testid={ `${index}-recipe-card` }
         >
           <img
-            className="recipe-card-img"
             src={ selectedOption === 'meals'
               ? recipe.strMealThumb : recipe.strDrinkThumb }
             alt={ recipe.strMeal }
             data-testid={ `${index}-card-img` }
           />
-          <p data-testid={ `${index}-card-name` }>
+          <p className="card_txt" data-testid={ `${index}-card-name` }>
             {selectedOption === 'drinks' && recipe.strDrink }
             {selectedOption === 'meals' && recipe.strMeal }
           </p>

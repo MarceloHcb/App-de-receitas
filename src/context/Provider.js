@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import Context from './Context';
@@ -7,22 +7,18 @@ import useFetch from '../hooks/useFetch';
 function Provider({ children }) {
   const history = useHistory();
   const pathnames = history.location.pathname;
-  console.log(pathnames);
   const [route, setRoute] = useState('/meals');
   const [url, setUrl] = useState('');
   const [inputSearch, setInputSearch] = useState('');
-  console.log(inputSearch);
-  const { dataApi, setDataApi, loading } = useFetch(url);
-  console.log(dataApi);
-
-  useEffect(() => {
-    if (route === '/meals' || pathnames === '/meals') {
-      setUrl('https://www.themealdb.com/api/json/v1/1/search.php?s=');
-    }
-    if (route === '/drinks' || pathnames === '/drinks') {
-      setUrl('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
-    }
-  }, [route, url, pathnames]);
+  let url1;
+  if (route === '/meals' || pathnames === '/meals') {
+    url1 = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+  }
+  if (route === '/drinks' || pathnames === '/drinks') {
+    url1 = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+  }
+  const result = url === '' ? url1 : url;
+  const { dataApi, setDataApi, loading } = useFetch(result);
 
   const contextValue = useMemo(() => ({
     url,
@@ -33,7 +29,7 @@ function Provider({ children }) {
     setRoute,
     setInputSearch,
     setDataApi,
-  }), [url, inputSearch, dataApi, setDataApi, setUrl, loading]);
+  }), [url, inputSearch, dataApi, loading, setDataApi, setUrl, setRoute]);
 
   return (
     <Context.Provider value={ contextValue }>

@@ -10,7 +10,6 @@ function Header({ search }) {
   const [showBar, setShowBar] = useState(false);
   const [inputSearch, setInputSearch] = useState('');
   const [conditional, setConditional] = useState(false);
-
   const page = history.location.pathname;
   const pageTitle = page === '/' ? '' : page.replace('/', '');
 

@@ -1,0 +1,125 @@
+.login_container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+}
+
+.form_login {
+  align-items: center;
+  border: 2px  solid hsla(0, 0%, 0%, 0.2);
+  border-radius: 10px;
+  box-shadow: 10px 10px hsla(0, 0%, 0%, 0.2);
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  justify-content: center;
+  margin-top: 30px;
+  padding: 20px;
+  position: fixed;
+  top: 310px;
+  width: 300px;
+}
+
+.bg_container {
+  background-color: rgb(130, 148, 96);
+  height: 300px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+}
+
+.logo {
+  margin-left: 10px;
+  position: fixed;
+  top: 50.2px;
+  width: 200px;
+  z-index: 1;
+}
+
+.descricao {
+  color: hsl(44, 98%, 50%);
+  font-family: FreeMono , monospace;
+  font-size: 29px;
+  font-weight: 700;
+  left: 40%;
+  margin-right: 10px;
+  margin-top: 60px;
+  position: absolute;
+  text-shadow: 1px 0.5px black;
+  top: 150px;
+  z-index: 9999;
+}
+
+@media ( max-width : 468px ) {
+
+  .logo {
+    left: -12%;
+    width: 50%;
+  }
+
+  .descricao {
+    font-size: 20px;
+    left: 47%;
+    margin-top: 0;
+    position: absolute;
+    text-align: center;
+    top: 70px;
+    width: 50%;
+  }
+}
+
+.receitas {
+  border-radius: 10px;
+  left: 0;
+  margin-bottom: 101px;
+  position: fixed;
+  top: 101.2px;
+  width: 350px;
+  z-index: 1;
+}
+
+.submit_buttom {
+  background-color: 4px 4px rgba(0, 0, 0, 0.2);
+  border: 0.5px solid hsl#464546;
+  border-radius: 8px;
+  color: hslrgb(73, 86, 61);
+  display: inline-block;
+  font-family: Cambria , Cochin , Georgia , Times , serif;
+  font-size: 16px;
+  font-weight: 500px;
+  margin-top: 10px;
+  padding: 10px 32px;
+  text-align: center;
+  width: 250px;
+}
+
+.submit_buttom:active {
+  background-color: rgb(130, 148, 96);
+}
+
+.input_login {
+  border: 0.5px solid hsl#464546;
+  border-radius: 8px;
+  font-family: Cambria , Cochin , Georgia , Times , serif;
+  padding: 10px;
+  text-align: center;
+  width: 250px;
+}
+
+.item_login {
+  margin-top: 10px;
+}
+
+.title {
+  border: 0.5px solid hsl#464546;
+  color: hsl(45, 56%, 20%);
+  display: flex;
+  font-family: Cambria , Cochin , Georgia , Times , serif;
+  justify-content: center;
+  margin-left: 1px;
+  margin-top: 30px;
+  text-shadow: 1.2px 0.5px black;
+}

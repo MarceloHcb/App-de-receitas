@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import logo from '../images/logo.png';
+import recipes from '../images/recipes.png';
+import '../css/login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -38,37 +41,49 @@ function Login() {
   };
 
   return (
-    <form>
-      <label htmlFor="email">
-        Email
-        <input
-          type="email"
-          data-testid="email-input"
-          name="email"
-          value={ email }
-          onChange={ handleEmail }
-        />
-      </label>
+    <div className="login_container">
+      <div className="bg_container" />
+      <img className="logo" src={ logo } alt="logo" />
+      <h1 className="descricao">As melhores receitas</h1>
+      <img className="receitas" src={ recipes } alt="recipesy" />
 
-      <label htmlFor="email">
-        Senha
-        <input
-          type="password"
-          value={ password }
-          onChange={ handlePassword }
-          data-testid="password-input"
-        />
-      </label>
+      <form className="form_login">
+        <h1 className="title">LOGIN</h1>
+        <label htmlFor="email" className="itemInputLogin">
+          <input
+            placeholder="Digite seu email"
+            type="email"
+            className="input_login item_login"
+            data-testid="email-input"
+            name="email"
+            value={ email }
+            onChange={ handleEmail }
+          />
+        </label>
 
-      <button
-        data-testid="login-submit-btn"
-        type="button"
-        disabled={ disabled }
-        onClick={ handleClick }
-      >
-        Entrar
-      </button>
-    </form>
+        <label htmlFor="email" className="itemInputLogin">
+          <input
+            placeholder="Digite sua senha"
+            className="input_login item_login"
+            type="password"
+            value={ password }
+            onChange={ handlePassword }
+            data-testid="password-input"
+          />
+        </label>
+
+        <button
+          className="submit_buttom item_login"
+          data-testid="login-submit-btn"
+          type="button"
+          disabled={ disabled }
+          onClick={ handleClick }
+        >
+          Entrar
+        </button>
+      </form>
+    </div>
+
   );
 }
 
