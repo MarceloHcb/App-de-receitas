@@ -4,6 +4,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Context from '../context/Context';
 import RecipesCards from './RecipesCards';
+import Recipes from './Recipes';
 
 function Drink({ match }) {
   const { dataApi, loading } = useContext(Context);
