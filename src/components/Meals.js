@@ -12,8 +12,8 @@ function Meals({ match }) {
     <div>
       <Header name={ match.path } search />
       {!loading && <RecipesCards dataApi={ dataApi } selectedOption="meals" />}
-      <Footer />
       {/* <Recipes dataApi={ dataApi } /> */}
+      <Footer />
     </div>
   );
 }

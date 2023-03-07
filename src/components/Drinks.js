@@ -11,6 +11,7 @@ function Drink({ match }) {
     <div>
       <Header name={ match.path } search />
       {!loading && <RecipesCards dataApi={ dataApi } selectedOption="drinks" />}
+      {/* <Recipes dataApi={ dataApi } /> */}
       <Footer />
     </div>
   );
