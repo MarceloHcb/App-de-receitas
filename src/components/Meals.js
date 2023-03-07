@@ -3,15 +3,17 @@ import PropTypes from 'prop-types';
 import Header from './Header';
 import Footer from './Footer';
 import Context from '../context/Context';
-import Recipes from './Recipes';
+import RecipesCards from './RecipesCards';
+// import Recipes from './Recipes';
 
 function Meals({ match }) {
   const { dataApi, loading } = useContext(Context);
   return (
     <div>
       <Header name={ match.path } search />
+      {!loading && <RecipesCards dataApi={ dataApi } selectedOption="meals" />}
+      {/* <Recipes dataApi={ dataApi } /> */}
       <Footer />
-      {!loading && <Recipes dataApi={ dataApi } selectedOption="meals" />}
     </div>
   );
 }

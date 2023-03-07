@@ -1,81 +1,79 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
-import Context from '../context/Context';
-import '../css/recipes.css';
+// import React, { useEffect, useState } from 'react';
+// import { useHistory } from 'react-router-dom';
 
-function Recipes({ dataApi, selectedOption }) {
-  const { loading } = useContext(Context);
-  const history = useHistory();
-  console.log(history.location);
-  const pathnames = history.location.pathname;
-  console.log(pathnames);
-  const max = 12;
-  if (loading) {
-    return (<h2>Loading...</h2>);
-  }
+// function Recipes({ dataApi }) {
+//   const [categories, setCategories] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   console.log(categories);
+//   const history = useHistory();
+//   let url = '';
+//   if (history.location.pathname === '/meals') {
+//     url = `https://www.themealdb.com/api/json/v1/1/list.php?c=${dataApi}`;
+//   }
+//   if (history.location.pathname === '/drinks') {
+//     url = `https://www.thecocktaildb.com/api/json/v1/1/list.php?c=${dataApi}`;
+//   }
 
-  const page = pathnames.replace('/', '');
-  if (dataApi && dataApi[page] === null) {
-    global.alert('Sorry, we haven\'t found any recipes for these filters.');
-    return;
-  }
-  if (Number(dataApi?.meals?.length) === 1 && pathnames === '/meals') {
-    const id = dataApi?.meals[0].idMeal;
-    history.push(`${history.location.pathname}/${id}`);
-    return;
-  }
-  if (Number(dataApi?.drinks?.length) === 1 && pathnames === '/drinks') {
-    const id = dataApi?.drinks[0].idDrink;
-    history.push(`${history.location.pathname}/${id}`);
-    return;
-  }
-  const recipes = selectedOption === 'drinks' ? dataApi?.drinks : dataApi?.meals;
+//   useEffect(() => {
+//     const fetchCategories = async () => {
+//       setLoading(true);
+//       const response = await fetch(url);
+//       const data = await response.json();
+//       const NUMBER_OF_CATEGORIES = 5;
+//       setCategories(data
+//         .filter((_, index) => index >= 0 && index < NUMBER_OF_CATEGORIES));
+//       setLoading(false);
+//     };
+//     fetchCategories();
+//   }, [url]);
 
-  return (
-    <div className="meals">
-      {recipes && recipes.slice(0, max).map((recipe, index) => (
-        <div
-          key={ recipe === 'meals' ? recipe.idMeal : recipe.idDrink }
-          data-testid={ `${index}-recipe-card` }
-        >
-          <img
-            className="recipe-card-img"
-            src={ selectedOption === 'meals'
-              ? recipe.strMealThumb : recipe.strDrinkThumb }
-            alt={ recipe.strMeal }
-            data-testid={ `${index}-card-img` }
-          />
-          <p data-testid={ `${index}-card-name` }>
-            {selectedOption === 'drinks' && recipe.strDrink }
-            {selectedOption === 'meals' && recipe.strMeal }
-          </p>
-        </div>
-      ))}
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       {!loading && categories?.map((category, index) => () => {
+//         <button
+//           type="button"
+//           data-testid={ `${category.strCategory}-category-filter` }
+//         >
+//           {category?.strCategory}
 
-Recipes.propTypes = {
-  selectedOption: PropTypes.string.isRequired,
-  dataApi: PropTypes.shape({
-    slice: PropTypes.func,
-    map: PropTypes.func,
-    meals: PropTypes.arrayOf(
-      PropTypes.shape({
-        idMeal: PropTypes.string,
-        strMealThumb: PropTypes.string,
-        strMeal: PropTypes.string,
-      }),
-    ),
-    drinks: PropTypes.arrayOf(
-      PropTypes.shape({
-        idDrink: PropTypes.string,
-        strDrinkThumb: PropTypes.string,
-        strDrink: PropTypes.string,
-      }),
-    ),
-  }).isRequired,
-};
+//         </button>;
+//       })}
 
-export default Recipes;
+//     </div>
+
+//   );
+// }
+
+// export default Recipes;
+
+// // useEffect(() => {
+// //     const request = async () => {
+// //       const response = await fetchMeals();
+// //       setMealsApi(response);
+
+// //       const data = await fetchCategoriesMeals();
+// //       const NUMBER_OF_CATEGORIES = 5;
+// //       setCategories(data
+// //         .filter((_, index) => index >= 0 && index < NUMBER_OF_CATEGORIES));
+// //     };
+// //     request();
+// //     setCategoryON(false);
+// //     setSearchON(false);
+// //   }, []);
+
+// //   const handleClick = async (category) => {
+// //     if (nameCategory !== category) {
+// //       const response = await fetchCategoryMeal(category);
+// //       setCategoryComida(response);
+// //       setSearchON(false);
+// //       setCategoryON(true);
+// //       setNameCategory(category);
+// //     } else {
+// //       setNameCategory('all');
+// //       setCategoryON(false);
+// //     }
+// //   };
+// //   const allMeals = () => {
+// //     setCategoryON(false);
+// //     setSearchON(false);
+// //   };
