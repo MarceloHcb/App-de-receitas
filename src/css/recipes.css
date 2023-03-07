@@ -1,18 +1,18 @@
-.recipes {
-  margin-bottom: 60px;
+.searchBar {
+  margin: 10px;
+  max-width: 100vw;
 }
 
-.categories {
-  color: #b1b1b1;
-  display: flex;
-  font-size: 0.7em;
-  justify-content: space-evenly;
-}
-
-.category {
+.meals {
+  align-content: center;
   align-items: center;
   display: flex;
-  flex-direction: column;
-  text-align: center;
-  width: 15%;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-around;
+}
+
+.recipe-card-img {
+  border-radius: 0.5rem;
+  width: 150px;
 }
