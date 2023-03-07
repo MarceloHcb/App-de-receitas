@@ -21,6 +21,11 @@ function Login() {
     }
   }, [email, password]);
 
+  const handleEmail = ({ target }) => {
+    const { value } = target;
+    setEmail(value);
+  };
+
   const saveUserLocalStorage = () => {
     localStorage.setItem('user', JSON.stringify({ email }));
   };
@@ -28,11 +33,6 @@ function Login() {
   const handleClick = () => {
     saveUserLocalStorage();
     history.push('/meals');
-  };
-
-  const handleEmail = ({ target }) => {
-    const { value } = target;
-    setEmail(value);
   };
 
   const handlePassword = ({ target }) => {
