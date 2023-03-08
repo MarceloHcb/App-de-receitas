@@ -4,6 +4,7 @@ import Context from '../context/Context';
 
 function Recipes() {
   const [categories, setCategories] = useState([]);
+  const [currentCategory, setCurrentCategory] = useState('');
   const [loading, setLoading] = useState(true);
   const { setUrl } = useContext(Context);
   const history = useHistory();
@@ -29,26 +30,34 @@ function Recipes() {
     };
     fetchCategories();
   }, [url, page]);
-
+  const handleAllclick = () => {
+    setUrl('');
+    setCurrentCategory([]);
+  };
   const handleClick = (category) => {
     if (history.location.pathname === '/meals') {
-      setUrl(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
-      history.push('/meals');
+      if (category === currentCategory) {
+        setUrl('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+        setCurrentCategory([]);
+      } else {
+        setCurrentCategory(category);
+        setUrl(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+      }
     }
-    if (category === 'Goat') {
-      setUrl('https://www.themealdb.com/api/json/v1/1/filter.php?c=Goat');
-    }
+
     if (history.location.pathname === '/drinks') {
-      setUrl(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
-    }
-    if (category === 'All') {
-      setUrl('');
+      if (category === currentCategory) {
+        setUrl('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+        setCurrentCategory([]);
+      } else {
+        setCurrentCategory(category);
+        setUrl(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
+      }
     }
   };
-
   return (
     <div>
-      {!loading && categories.map((category, index) => (
+      {!loading && categories?.map((category, index) => (
         <button
           type="button"
           data-testid={ `${category.strCategory}-category-filter` }
@@ -62,7 +71,7 @@ function Recipes() {
       <button
         type="button"
         data-testid="All-category-filter"
-        onClick={ () => handleClick('All') }
+        onClick={ () => handleAllclick() }
       >
         All
       </button>
