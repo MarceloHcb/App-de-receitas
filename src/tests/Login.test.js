@@ -2,7 +2,11 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Login from '../pages/Login';
+
+import { renderWithRouterAndRedux } from './helpers/renderWith';
+
 import renderWithRouter from './helper/renderWithRouter';
+
 
 const emailDataTestid = 'email-input';
 const passwordDataTestid = 'password-input';

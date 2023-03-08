@@ -1,0 +1,149 @@
+.container-recipes {
+  padding-bottom: 45px;
+}
+
+.image {
+  filter: brightness(50%) contrast(130%);
+  gap: 10px;
+  height: 120px;
+  object-fit: cover;
+  object-position: top;
+  width: 100%;
+  z-index: 1;
+}
+
+.title-details {
+  color: white;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 900;
+  left: 0;
+  letter-spacing: 0.105em;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-wrap: break-word;
+  position: absolute;
+  right: 10px;
+  text-align: center;
+  text-shadow: 1.2px 0.5px black;
+  text-transform: uppercase;
+  top: 2px;
+  width: 200px;
+}
+
+.category-details {
+  color: white;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  margin-left: 35px;
+  margin-right: 5px;
+  position: absolute;
+  top: 20px;
+  width: 25px;
+  z-index: 1;
+}
+
+.deltails-titles {
+  color: rgb(130, 148, 96);
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  text-align: justify;
+  text-shadow: 0.8px 0.5px black;
+}
+
+.infos-details {
+  padding: 0 15px;
+}
+
+.ingredients {
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 300;
+  margin-top: 5px;
+  text-align: justify;
+}
+
+.img-details {
+  margin-top: -15px;
+  width: 80%;
+}
+
+.instructions {
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 300;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 5px;
+  text-align: justify;
+}
+
+.video-details {
+  margin-top: -15px;
+  width: 100%;
+}
+
+.carrousel {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12) , 0 1px 2px rgba(0, 0, 0, 0.24);
+  display: flex;
+  filter: brightness(65%) contrast(130%);
+  flex-direction: row;
+  gap: 5px;
+  justify-content: center;
+  margin-top: 25px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  padding: auto;
+  transition: transform 0.2s ease;
+  width: 100%;
+  z-index: 9999;
+}
+
+.image-recommendations {
+  height: 100%;
+  width: 100%;
+}
+
+/* .carrousel::-webkit-scrollbar-Y {
+  display: none;
+} */
+
+@media ( max-width : 375px ) {
+
+  .carrousel {
+    align-items: flex-start;
+    height: 415px;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .image-recommendations {
+    height: 200px;
+    width: 175px;
+  }
+}
+
+.button-start {
+  background-color: hsl(45, 89%, 54%);
+  border: none;
+  border-radius: 5px;
+  bottom: 0;
+  color: rgb(130, 148, 96);
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 500;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 4px;
+  position: fixed;
+  right: 0;
+  text-align: center;
+  text-decoration: none;
+  top: 95%;
+  width: 332px;
+}

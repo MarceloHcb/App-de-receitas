@@ -1,6 +1,7 @@
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Header from '../components/Header';
+import Provider from '../context/Provider';
 import { renderWithRouter } from '../helpers/renderWith';
 
 describe('Efetua testes no component Header', () => {
@@ -24,10 +25,14 @@ describe('Efetua testes no component Header', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/profile');
   });
-  it('Verifica se ao clicar no icone de busca e digitar o valor é inserido corretamente', () => {
-    renderWithRouter(<Header search />);
+  it('Verifica se ao clicar no icone de busca e digitar o valor é inserido corretamente', async () => {
+    renderWithRouter(
+      <Provider>
+        <Header search />
+      </Provider>,
+    );
     userEvent.click(screen.getByTestId('search-top-btn'));
-    expect(screen.getByRole('textbox')).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByRole('textbox')).toBeInTheDocument());
     userEvent.type(screen.getByRole('textbox'), 'abc');
     expect(screen.getByRole('textbox')).toHaveValue('abc');
   });
