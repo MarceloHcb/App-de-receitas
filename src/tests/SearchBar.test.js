@@ -1,13 +1,7 @@
-// import { act, screen, waitFor } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
-// import Header from '../components/Header';
-// import { meals } from '../helpers/mockData';
-import { act, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { act, screen } from '@testing-library/react';
 import App from '../App';
-import Header from '../components/Header';
-import { meals } from './helpers/mockData';
-import { renderWithRouter } from './helpers/renderWith';
+import { renderWithRouter } from '../helpers/renderWith';
+import Provider from '../context/Provider';
 
 // const filters = ['ingredient-search-radio', 'name-search-radio', 'first-letter-search-radio'];
 // const buttonSearch = 'search-top-btn';
