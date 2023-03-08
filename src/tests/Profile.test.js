@@ -2,10 +2,13 @@ import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Profile from '../pages/Profile';
 import { renderWithRouter } from '../helpers/renderWith';
+import Provider from '../context/Provider';
 
 describe('', () => {
   test('Verifica se os elementos estão na tela', () => {
-    const { history } = renderWithRouter(<Profile search />);
+    const { history } = renderWithRouter(
+      <Provider><Profile search /></Provider>,
+    );
 
     act(() => {
       history.push('/profile');
@@ -27,7 +30,7 @@ describe('', () => {
     expect(logoutBtn).toBeInTheDocument();
   });
   test('Verifica se ao clicar no botão de receitas feitas, ele muda de tela', () => {
-    const { history } = renderWithRouter(<Profile search />);
+    const { history } = renderWithRouter(<Provider><Profile search /></Provider>);
 
     act(() => {
       history.push('/profile');
@@ -40,7 +43,7 @@ describe('', () => {
     expect(doneRecipes.pathname).toBe('/done-recipes');
   });
   test('Verifica se ao clicar no botão de receitas favoritas, ele muda de tela', () => {
-    const { history } = renderWithRouter(<Profile search />);
+    const { history } = renderWithRouter(<Provider><Profile search /></Provider>);
 
     act(() => {
       history.push('/profile');
@@ -53,7 +56,7 @@ describe('', () => {
     expect(favRecipes.pathname).toBe('/favorite-recipes');
   });
   test('', () => {
-    const { history } = renderWithRouter(<Profile search />);
+    const { history } = renderWithRouter(<Provider><Profile search /></Provider>);
 
     act(() => {
       history.push('/profile');
