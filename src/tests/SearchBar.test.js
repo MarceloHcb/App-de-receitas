@@ -2,12 +2,12 @@
 // import userEvent from '@testing-library/user-event';
 // import Header from '../components/Header';
 // import { meals } from '../helpers/mockData';
-import { act } from 'react-dom/test-utils';
-import { screen } from '@testing-library/react';
-import { renderWithRouter } from '../helpers/renderWith';
-import Provider from '../context/Provider';
-import fetch from '../../cypress/mocks/fetch';
+import { act, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import App from '../App';
+import Header from '../components/Header';
+import { meals } from './helpers/mockData';
+import { renderWithRouter } from './helpers/renderWith';
 
 // const filters = ['ingredient-search-radio', 'name-search-radio', 'first-letter-search-radio'];
 // const buttonSearch = 'search-top-btn';
