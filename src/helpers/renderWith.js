@@ -4,8 +4,6 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import { applyMiddleware, createStore } from 'redux';
 import { render } from '@testing-library/react';
-import thunk from 'redux-thunk';
-import rootReducer from '../redux/reducers';
 
 function withRouter(component, history) {
   return (
