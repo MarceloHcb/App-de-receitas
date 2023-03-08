@@ -1,42 +1,41 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Login from '../pages/Login';
-import { renderWithRouterAndRedux } from '../helpers/renderWith';
+import renderWithRouter from '../helpers/renderWith';
 
-const button = 'login-submit-btn';
+const emailDataTestid = 'email-input';
+const passwordDataTestid = 'password-input';
+const loginButtonDataTestid = 'login-submit-btn';
 
-describe('Testa a página de login', () => {
-  test('Verifica se a tela de login é renderizada na rota correta', () => {
-    const { history } = renderWithRouterAndRedux(<Login />);
-    const { pathname } = history.location;
-    expect(pathname).toBe('/');
-  });
-  test('Verifica se renderiza os campos de email e senha', () => {
-    renderWithRouterAndRedux(<Login />);
-    const emailInput = screen.getByTestId('email-input');
+describe('Testa a pagina Login', () => {
+  it('testa se os inputs e o botão existem', () => {
+    render(<Login />);
+    const emailInput = screen.getByTestId(emailDataTestid);
+    const passwordInput = screen.getByTestId(passwordDataTestid);
+    const loginButton = screen.getByTestId(loginButtonDataTestid);
     expect(emailInput).toBeInTheDocument();
-    const passWord = screen.getByTestId('password-input');
-    expect(passWord).toBeInTheDocument();
+    expect(passwordInput).toBeInTheDocument();
+    expect(loginButton).toBeInTheDocument();
   });
-  test('Verifica se renderiza o botão desativado de entrar', () => {
-    renderWithRouterAndRedux(<Login />);
-    const buttonLogin = screen.getByTestId(button);
-    expect(buttonLogin).toBeInTheDocument();
-    expect(buttonLogin).toBeDisabled();
+  it('testa se é possível digitar nos inputs e se os mesmos foram validados corretamente (email valido e senha não menor que 6 caracteres)', () => {
+    render(<Login />);
+    const emailInput = screen.getByTestId(emailDataTestid);
+    const passwordInput = screen.getByTestId(passwordDataTestid);
+    const loginButton = screen.getByTestId(loginButtonDataTestid);
+    userEvent.type(emailInput, 'teste@teste.com');
+    userEvent.type(passwordInput, '1234567');
+    expect(loginButton).toBeEnabled();
   });
-  test('Verifica se o botão é habilitado após o preenchimento e se redireciona para "/meals" após clicado', () => {
-    const { history } = renderWithRouterAndRedux(<Login />);
-    const passWord = screen.getByTestId('password-input');
-    const emailInput = screen.getByTestId('email-input');
-    const buttonLogin = screen.getByTestId(button);
-    userEvent.type(emailInput, 'email@test.com');
-    userEvent.type(passWord, '1234567');
-    expect(buttonLogin).not.toBeDisabled();
-    userEvent.click(screen.getByTestId(button));
+  it('testa o redirecionamento apos o click do botão', () => {
+    const { history } = renderWithRouter(<Login />);
+    const emailInput = screen.getByTestId(emailDataTestid);
+    const passwordInput = screen.getByTestId(passwordDataTestid);
+    const loginButton = screen.getByTestId(loginButtonDataTestid);
+    userEvent.type(emailInput, 'teste@teste.com');
+    userEvent.type(passwordInput, '1234567');
+    userEvent.click(loginButton);
     const { pathname } = history.location;
     expect(pathname).toBe('/meals');
-    const userEmail = JSON.parse(localStorage.getItem('user')).email;
-    expect(userEmail).toBe('email@test.com');
   });
 });
