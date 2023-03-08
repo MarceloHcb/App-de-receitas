@@ -1,12 +1,8 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Login from '../pages/Login';
-
-import { renderWithRouterAndRedux } from './helpers/renderWith';
-
-import renderWithRouter from './helper/renderWithRouter';
-
+import { renderWithRouter } from '../helpers/renderWith';
 
 const emailDataTestid = 'email-input';
 const passwordDataTestid = 'password-input';
@@ -14,7 +10,7 @@ const loginButtonDataTestid = 'login-submit-btn';
 
 describe('Testa a pagina Login', () => {
   it('testa se os inputs e o botão existem', () => {
-    render(<Login />);
+    renderWithRouter(<Login />);
     const emailInput = screen.getByTestId(emailDataTestid);
     const passwordInput = screen.getByTestId(passwordDataTestid);
     const loginButton = screen.getByTestId(loginButtonDataTestid);
@@ -23,7 +19,7 @@ describe('Testa a pagina Login', () => {
     expect(loginButton).toBeInTheDocument();
   });
   it('testa se é possível digitar nos inputs e se os mesmos foram validados corretamente (email valido e senha não menor que 6 caracteres)', () => {
-    render(<Login />);
+    renderWithRouter(<Login />);
     const emailInput = screen.getByTestId(emailDataTestid);
     const passwordInput = screen.getByTestId(passwordDataTestid);
     const loginButton = screen.getByTestId(loginButtonDataTestid);
