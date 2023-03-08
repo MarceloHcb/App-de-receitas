@@ -7,11 +7,11 @@ import RecipesCards from '../components/RecipesCards';
 import Recipes from '../components/Recipes';
 
 function Drink({ match }) {
-  const { dataApi, loading } = useContext(Context);
+  const { dataApi } = useContext(Context);
   return (
     <div>
       <Header name={ match.path } search />
-      {!loading && <RecipesCards dataApi={ dataApi } selectedOption="drinks" />}
+      <RecipesCards dataApi={ dataApi } selectedOption="drinks" />
       <Recipes />
       <Footer />
     </div>

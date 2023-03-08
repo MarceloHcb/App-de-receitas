@@ -5,8 +5,37 @@
 .categories {
   color: #b1b1b1;
   display: flex;
+  flex-wrap: wrap;
   font-size: 0.7em;
   justify-content: space-evenly;
+  margin: 0 auto;
+  width: 50%;
+}
+
+.card {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12) , 0 1px 2px rgba(0, 0, 0, 0.24);
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  padding: 10px;
+  transition: transform 0.2s ease;
+  width: 20%;
+}
+
+.category-button {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 15%;
+}
+
+.category-button:hover {
+  box-shadow: 0 3px 11px rgba(33, 33, 33, 0.2);
+  transform: scale(1.1);
 }
 
 .category {

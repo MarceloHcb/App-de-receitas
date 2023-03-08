@@ -32,12 +32,15 @@ function RecipesCards({ dataApi, selectedOption }) {
   return (
     <div className="categories">
       {recipes && recipes.slice(0, max).map((recipe, index) => (
-        <div
-          className="card"
+        <button
+          className="category-button"
           key={ recipe === 'meals' ? recipe.idMeal : recipe.idDrink }
           data-testid={ `${index}-recipe-card` }
+          onClick={ () => history
+            .push(`${history.location.pathname}/${recipe.idMeal || recipe.idDrink}`) }
         >
           <img
+            className="card-img"
             src={ selectedOption === 'meals'
               ? recipe.strMealThumb : recipe.strDrinkThumb }
             alt={ recipe.strMeal }
@@ -47,7 +50,7 @@ function RecipesCards({ dataApi, selectedOption }) {
             {selectedOption === 'drinks' && recipe.strDrink }
             {selectedOption === 'meals' && recipe.strMeal }
           </p>
-        </div>
+        </button>
       ))}
     </div>
   );
