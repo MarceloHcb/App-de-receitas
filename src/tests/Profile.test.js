@@ -1,6 +1,6 @@
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Profile from '../components/Profile';
+import Profile from '../pages/Profile';
 import { renderWithRouter } from '../helpers/renderWith';
 
 describe('', () => {

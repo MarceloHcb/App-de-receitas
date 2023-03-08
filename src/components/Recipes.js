@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import Context from '../context/Context';
 
 function Recipes() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { setUrl } = useContext(Context);
   const history = useHistory();
   let url = '';
 
-  
   const rote = history.location.pathname;
   const page = rote.replace('/', '');
   if (history.location.pathname === '/meals') {
@@ -28,7 +29,22 @@ function Recipes() {
     };
     fetchCategories();
   }, [url, page]);
-  console.log(categories);
+
+  const handleClick = (category) => {
+    if (history.location.pathname === '/meals') {
+      setUrl(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+      history.push('/meals');
+    }
+    if (category === 'Goat') {
+      setUrl('https://www.themealdb.com/api/json/v1/1/filter.php?c=Goat');
+    }
+    if (history.location.pathname === '/drinks') {
+      setUrl(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
+    }
+    if (category === 'All') {
+      setUrl('');
+    }
+  };
 
   return (
     <div>
@@ -37,10 +53,19 @@ function Recipes() {
           type="button"
           data-testid={ `${category.strCategory}-category-filter` }
           key={ index }
+          onClick={ () => handleClick(category.strCategory) }
         >
           {category.strCategory}
         </button>
+
       ))}
+      <button
+        type="button"
+        data-testid="All-category-filter"
+        onClick={ () => handleClick('All') }
+      >
+        All
+      </button>
     </div>
 
   );

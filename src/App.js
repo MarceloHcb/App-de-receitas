@@ -4,15 +4,15 @@ import { Switch, Route } from 'react-router-dom';
 // import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
-import Profile from './components/Profile';
-import FavoriteRecipes from './components/FavoritesRecipes';
-import DoneRecipes from './components/DoneRecipes';
-import RecipeInProgress from './components/RecipeInProgress';
-import Drinks from './components/Drinks';
+import Profile from './pages/Profile';
+import FavoriteRecipes from './pages/FavoritesRecipes';
+import DoneRecipes from './pages/DoneRecipes';
+import RecipeInProgress from './pages/RecipeInProgress';
+import Drinks from './pages/Drinks';
 import RecipeDetails from './components/RecipeDetails';
 import DrinksInProgress from './pages/DrinksInProgress';
 import DrinksDetails from './pages/DrinksDetails';
-import Meals from './components/Meals';
+import Meals from './pages/Meals';
 
 function App() {
   return (

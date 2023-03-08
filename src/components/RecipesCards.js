@@ -5,21 +5,19 @@ import Context from '../context/Context';
 import '../css/recipes.css';
 
 function RecipesCards({ dataApi, selectedOption }) {
-  const { loading } = useContext(Context);
+  const { loading, url } = useContext(Context);
   const history = useHistory();
-  console.log(history.location);
   const pathnames = history.location.pathname;
   const max = 12;
   if (loading) {
     return (<h2>Loading...</h2>);
   }
-
   const page = pathnames.replace('/', '');
   if (dataApi && dataApi[page] === null) {
     global.alert('Sorry, we haven\'t found any recipes for these filters.');
     return;
   }
-  if (Number(dataApi?.meals?.length) === 1 && pathnames === '/meals') {
+  if (Number(dataApi?.meals?.length) === 1 && pathnames === '/meals' && !url.includes('https://www.themealdb.com/api/json/v1/1/filter.php?c=')) {
     const id = dataApi?.meals[0].idMeal;
     history.push(`${history.location.pathname}/${id}`);
     return;
