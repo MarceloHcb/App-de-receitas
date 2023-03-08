@@ -30,7 +30,7 @@ function Provider({ children }) {
     setInputSearch,
     setDataApi,
   }), [url, inputSearch, dataApi, loading, setDataApi, setUrl, setRoute]);
-  console.log('dataApi', dataApi);
+
   return (
     <Context.Provider value={ contextValue }>
       {children}
