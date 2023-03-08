@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { fireEvent, screen } from '@testing-library/react';
 import { renderWithRouter } from './helpers/renderWith';
@@ -10,30 +11,47 @@ describe('Testando o componente Footer', () => {
       <Provider>
         <Footer />
       </Provider>,
+
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import Provider from '../context/Provider';
+import Profile from '../pages/Profile';
+import { renderWithRouter } from '../helpers/renderWith';
+
+describe('', () => {
+  test('', () => {
+    const { history } = renderWithRouter(
+      <Provider>
+        <Profile />
+      </Provider>,
+      { initialEntries: ['/profile'] },
+
     );
 
-    const drinksBtn = screen.getByTestId('drinks-bottom-btn');
-    const mealsBtn = screen.getByTestId('meals-bottom-btn');
+    const drinksBottomBtn = screen.getByTestId('drinks-bottom-btn');
+    const mealsBottomBtn = screen.getByTestId('meals-bottom-btn');
+    expect(drinksBottomBtn).toBeInTheDocument();
+    expect(mealsBottomBtn).toBeInTheDocument();
 
-    expect(drinksBtn).toBeInTheDocument();
-    expect(mealsBtn).toBeInTheDocument();
+    userEvent.click(drinksBottomBtn);
+
+    const currentLocation = history.location.pathname;
+    expect(currentLocation).toBe('/drinks');
   });
+  test('', () => {
+    const { history } = renderWithRouter(
+      <Provider>
+        <Profile />
+      </Provider>,
+      { initialEntries: ['/profile'] },
+    );
 
-  it('Verifica se o icone de drinks redireciona para a página "/drinks"', () => {
-    const { history } = renderWithRouter(<Footer />);
+    const mealsBottomBtn = screen.getByTestId('meals-bottom-btn');
+    expect(mealsBottomBtn).toBeInTheDocument();
 
-    const drinksBtn = screen.getByTestId('drinks-bottom-btn');
-    fireEvent.click(drinksBtn);
+    userEvent.click(mealsBottomBtn);
 
-    expect(history.location.pathname).toBe('/drinks');
-  });
-
-  it('Verifica se o icone de meals redireciona para a página "/meals"', () => {
-    const { history } = renderWithRouter(<Footer />);
-
-    const mealsBtn = screen.getByTestId('meals-bottom-btn');
-    fireEvent.click(mealsBtn);
-
-    expect(history.location.pathname).toBe('/meals');
+    const currentLocation = history.location.pathname;
+    expect(currentLocation).toBe('/meals');
   });
 });
