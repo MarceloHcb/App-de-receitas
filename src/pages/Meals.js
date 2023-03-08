@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import Header from './Header';
-import Footer from './Footer';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 import Context from '../context/Context';
-import RecipesCards from './RecipesCards';
-import Recipes from './Recipes';
+import RecipesCards from '../components/RecipesCards';
+import Recipes from '../components/Recipes';
 
 function Meals({ match }) {
   const { dataApi, loading } = useContext(Context);
@@ -12,7 +12,7 @@ function Meals({ match }) {
     <div>
       <Header name={ match.path } search />
       {!loading && <RecipesCards dataApi={ dataApi } selectedOption="meals" />}
-      {/* <Recipes dataApi={ dataApi } /> */}
+      <Recipes />
       <Footer />
     </div>
   );

@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import favoriteIcon from '../images/blackHeartIcon.svg';
 import unFavoriteIcon from '../images/whiteHeartIcon.svg';
-import Header from './Header';
+import Header from '../components/Header';
 
 function FavoriteRecipes() {
   const history = useHistory();
