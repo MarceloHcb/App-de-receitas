@@ -36,13 +36,14 @@ function App() {
           path="/meals/:id-da-receita/in-progress"
           component={ RecipeInProgress }
         />
-        <Route exact path="/meals/:id-da-receita" component={ RecipeDetails } />
+        <Route exact path="/meals/:id" component={ RecipeDetails } />
+        <Route exact path="/drinks/:id" component={ RecipeDetails } />
         <Route
           exact
-          path="/drinks/:id-da-receita/in-progress"
+          path="/drinks/:id/in-progress"
           component={ DrinksInProgress }
         />
-        <Route exact path="/drinks/:id-da-receita" component={ DrinksDetails } />
+        <Route exact path="/drinks/:id" component={ DrinksDetails } />
         <Route exact path="/drinks" component={ Drinks } />
       </Switch>
     </div>

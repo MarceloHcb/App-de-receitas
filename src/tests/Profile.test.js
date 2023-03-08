@@ -1,7 +1,7 @@
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Profile from '../pages/Profile';
-import { renderWithRouter } from '../helpers/renderWith';
+import { renderWithRouter } from './helpers/renderWith';
 
 describe('', () => {
   test('Verifica se os elementos estão na tela', () => {

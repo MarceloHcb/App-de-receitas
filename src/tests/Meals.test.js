@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react';
-import { renderWithRouter } from '../helpers/renderWith';
+import { renderWithRouter } from './helpers/renderWith';
 import App from '../App';
 
 describe('Testa o componente Meals.js', () => {

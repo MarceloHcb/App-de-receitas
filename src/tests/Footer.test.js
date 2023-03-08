@@ -1,11 +1,16 @@
 import React from 'react';
 import { fireEvent, screen } from '@testing-library/react';
-import { renderWithRouter } from '../helpers/renderWith';
+import { renderWithRouter } from './helpers/renderWith';
 import Footer from '../components/Footer';
+import Provider from '../context/Provider';
 
 describe('Testando o componente Footer', () => {
   it('Verifica se o componente Footer é renderizado corretamente', () => {
-    renderWithRouter(<Footer />);
+    renderWithRouter(
+      <Provider>
+        <Footer />
+      </Provider>,
+    );
 
     const drinksBtn = screen.getByTestId('drinks-bottom-btn');
     const mealsBtn = screen.getByTestId('meals-bottom-btn');
