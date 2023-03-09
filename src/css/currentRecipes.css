@@ -144,7 +144,7 @@
   right: 0;
   text-align: center;
   text-decoration: none;
-  top: 95%;
+  top: 94%;
   width: 332px;
 }
 
@@ -154,4 +154,11 @@
 
 .btn-favorite {
   left: 60%;
+}
+
+@media ( max-width : 1100px ) {
+
+  .button-start {
+    width: 25%;
+  }
 }

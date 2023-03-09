@@ -1,23 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import CurrentRecipes from './CurrentRecipes';
+import shareIcon from '../images/shareIcon.svg';
+import { LocalStorage } from '../helpers/localStorage';
 
 function RecipeDetails() {
   const history = useHistory();
   const pathname = history.location.pathname.includes('meals') ? 'meals' : 'drinks';
   const params = useParams();
   const { id } = params;
+  const [message, setMessage] = useState('');
   const [data, setData] = useState({ [pathname]: [{}] });
+  const [favorite, setIsFavorite] = useState(false);
+  console.log(favorite);
   const [recommendationsData, setRecommendationsData] = useState({ [pathname]: [{}] });
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [inprogressRecipes, setInprogressRecipes] = useState([]);
+  const timeNumber = 3000;
+  console.log(inprogressRecipes);
+  console.log(id);
   const fetchUrl = async (url, setFunc) => {
     const response = await fetch(url);
     const result = await response.json();
     setFunc(result);
     return result;
   };
-
+  if (message) {
+    setTimeout(() => setMessage(''), timeNumber);
+  }
   useEffect(() => {
     const updatingInformat = async () => {
       if (history.location.pathname.includes('meals')) {
@@ -44,7 +54,6 @@ function RecipeDetails() {
     .filter((el) => el.includes('strMeasure'));
   const measure = measureKeys.map((el) => data[pathname][0][el])
     .filter((el) => el !== null && el !== '');
-  console.log(history.location.pathname);
   return (
     <div>
       <div className="container-recipes">
@@ -73,10 +82,18 @@ function RecipeDetails() {
               <button
                 className="button-start btn-share"
                 data-testid="share-btn"
+                onClick={ () => {
+                  navigator.clipboard.writeText(`http://localhost:3000${history.location.pathname}`)
+                    .then(() => setMessage('Link copied!'));
+                } }
               >
+                <img src={ shareIcon } alt="share" />
+                <p style={ { color: 'red' } }>{message}</p>
                 Share Recipe
+
               </button>
               <button
+                onClick={ () => LocalStorage(...data[pathname], id, setIsFavorite) }
                 className="button-start btn-favorite"
                 data-testid="favorite-btn"
               >
