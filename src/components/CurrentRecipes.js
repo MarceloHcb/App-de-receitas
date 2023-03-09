@@ -47,7 +47,7 @@ function CurrentRecipes({ data, ingredients, measure, pathname,
                   ))
                 }
               </ul>
-              <h1 className="deltails-titles">INSTRUCTIONS</h1>
+              <h1 className="deltails-titles">INSTRUCTnkhIONS</h1>
 
               <p
                 className="instructions"
@@ -90,6 +90,7 @@ function CurrentRecipes({ data, ingredients, measure, pathname,
 
   return (
     <div className="container-recipes">
+      <button>ewdedf</button>
       {
         ['idDrink'] in data[pathname][0]
             && Object.values(data)[0].map((param) => (

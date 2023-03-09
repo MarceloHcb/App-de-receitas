@@ -10,7 +10,7 @@ function RecipeDetails() {
   const [data, setData] = useState({ [pathname]: [{}] });
   const [recommendationsData, setRecommendationsData] = useState({ [pathname]: [{}] });
   const [doneRecipes, setDoneRecipes] = useState([]);
-
+  const [inprogressRecipes, setInprogressRecipes] = useState([]);
   const fetchUrl = async (url, setFunc) => {
     const response = await fetch(url);
     const result = await response.json();
@@ -25,13 +25,12 @@ function RecipeDetails() {
         await fetchUrl('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=', setRecommendationsData);
       }
       if (history.location.pathname.includes('drinks')) {
-        console.log('else if');
         await fetchUrl(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`, setData);
         await fetchUrl('https://www.themealdb.com/api/json/v1/1/search.php?s=', setRecommendationsData);
       }
     };
-    updatingInformat();
 
+    updatingInformat();
     const getDoneRecipes = localStorage.getItem('doneRecipes');
     const localDoneRecipes = getDoneRecipes ? JSON.parse(getDoneRecipes) : [];
     setDoneRecipes(localDoneRecipes);
@@ -46,51 +45,26 @@ function RecipeDetails() {
   const measure = measureKeys.map((el) => data[pathname][0][el])
     .filter((el) => el !== null && el !== '');
 
-  if (pathname === 'meals') {
-    return (
-      <div>
-        <div className="container-recipes">
-          <CurrentRecipes
-            data={ data }
-            ingredients={ ingredients }
-            measure={ measure }
-            pathname={ pathname }
-            recommendationsData={ recommendationsData }
-          />
-        </div>
-        {
-          doneRecipes.some((el) => (el.id === id))
-            ? '' : (
-              <button
-                className="button-start"
-                data-testid="start-recipe-btn"
-
-              >
-                Start Recipe
-              </button>
-            )
-        }
-      </div>
-    );
-  }
-
   return (
-    <div className="d-block w-100 container-recipes">
-      <CurrentRecipes
-        data={ data }
-        ingredients={ ingredients }
-        measure={ measure }
-        pathname={ pathname }
-        recommendationsData={ recommendationsData }
-      />
+    <div>
+      <div className="container-recipes">
+        <CurrentRecipes
+          data={ data }
+          ingredients={ ingredients }
+          measure={ measure }
+          pathname={ pathname }
+          recommendationsData={ recommendationsData }
+        />
+      </div>
       {
         doneRecipes.some((el) => (el.id === id))
           ? '' : (
             <button
               className="button-start"
               data-testid="start-recipe-btn"
+              onClick={ () => setInprogressRecipes([...inprogressRecipes, id]) }
             >
-              Start Recipe
+              {inprogressRecipes.includes(id) ? 'Start Recipe' : 'Continue Recipe'}
             </button>
           )
       }
