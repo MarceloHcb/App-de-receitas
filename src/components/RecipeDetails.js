@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import CurrentRecipes from './CurrentRecipes';
 import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import { LocalStorage } from '../helpers/localStorage';
 
 function RecipeDetails() {
@@ -9,10 +11,15 @@ function RecipeDetails() {
   const pathname = history.location.pathname.includes('meals') ? 'meals' : 'drinks';
   const params = useParams();
   const { id } = params;
+  const localFavoritesRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const isFavorite = localFavoritesRecipes
+    ?.some((el) => (el.id === id));
+  console.log(isFavorite);
   const [message, setMessage] = useState('');
   const [data, setData] = useState({ [pathname]: [{}] });
-  const [favorite, setIsFavorite] = useState(false);
+  const [favorite, setIsFavorite] = useState(isFavorite);
   console.log(favorite);
+
   const [recommendationsData, setRecommendationsData] = useState({ [pathname]: [{}] });
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [inprogressRecipes, setInprogressRecipes] = useState([]);
@@ -89,16 +96,19 @@ function RecipeDetails() {
               >
                 <img src={ shareIcon } alt="share" />
                 <p style={ { color: 'red' } }>{message}</p>
-                Share Recipe
-
               </button>
               <button
                 onClick={ () => LocalStorage(...data[pathname], id, setIsFavorite) }
                 className="button-start btn-favorite"
-                data-testid="favorite-btn"
               >
-                Favorite Recipe
+                <img
+                  data-testid="favorite-btn"
+                  src={ favorite ? blackHeartIcon : whiteHeartIcon }
+                  alt="favorite"
+                />
+
               </button>
+
             </>
           )
       }

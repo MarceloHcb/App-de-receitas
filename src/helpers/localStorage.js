@@ -14,20 +14,19 @@ export const LocalStorage = (
   };
   const localFavoritesRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const localDuplicateId = localFavoritesRecipes
-    ?.some((el) => (el.idMeal === id) || (el.idDrink === id));
+    ?.some((el) => (el.id === id));
 
   console.log(localFavoritesRecipes);
   if (localFavoritesRecipes && localDuplicateId) {
-    if (localFavoritesRecipes.some((el) => el.idMeal === id)) {
+    if (localFavoritesRecipes.some((el) => el.id === id)) {
       localStorage.setItem('favoriteRecipes', JSON
-        .stringify(localFavoritesRecipes.filter((el) => el.idMeal !== id)));
+        .stringify(localFavoritesRecipes.filter((el) => el.id !== id)));
       setIsFavorite(false);
       return;
     }
     localStorage.setItem('favoriteRecipes', JSON
-      .stringify(localFavoritesRecipes.filter((el) => el.idDrink !== id)));
+      .stringify(localFavoritesRecipes.filter((el) => el.id !== id)));
     setIsFavorite(false);
-
     return;
   }
   if (!localFavoritesRecipes) {
