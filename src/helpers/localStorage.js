@@ -1,16 +1,43 @@
 export const LocalStorage = (
-  localFavoritesRecipes,
   currentFavoriteRecipe,
   id,
   setIsFavorite,
 ) => {
-  if (localFavoritesRecipes.some((el) => el.id === id)) {
+  const obj = {
+    alcoholicOrNot: currentFavoriteRecipe.strAlcoholic || '',
+    id: currentFavoriteRecipe.idMeal || currentFavoriteRecipe.idDrink,
+    type: currentFavoriteRecipe.strAlcoholic ? 'drink' : 'meal',
+    name: currentFavoriteRecipe.strMeal || currentFavoriteRecipe.strDrink,
+    nationality: currentFavoriteRecipe.strArea || '',
+    category: currentFavoriteRecipe.strCategory,
+    image: currentFavoriteRecipe.strMealThumb || currentFavoriteRecipe.strDrinkThumb,
+  };
+  const localFavoritesRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const localDuplicateId = localFavoritesRecipes
+    ?.some((el) => (el.idMeal === id) || (el.idDrink === id));
+
+  console.log(localFavoritesRecipes);
+  if (localFavoritesRecipes && localDuplicateId) {
+    if (localFavoritesRecipes.some((el) => el.idMeal === id)) {
+      localStorage.setItem('favoriteRecipes', JSON
+        .stringify(localFavoritesRecipes.filter((el) => el.idMeal !== id)));
+      setIsFavorite(false);
+      return;
+    }
+    localStorage.setItem('favoriteRecipes', JSON
+      .stringify(localFavoritesRecipes.filter((el) => el.idDrink !== id)));
     setIsFavorite(false);
+
+    return;
+  }
+  if (!localFavoritesRecipes) {
     localStorage.setItem('favoriteRecipes', JSON
-      .stringify(localFavoritesRecipes.filter((el) => el.id !== id)));
-  } else {
+      .stringify([obj]));
+    setIsFavorite(true);
+  }
+  if (localFavoritesRecipes !== null) {
     localStorage.setItem('favoriteRecipes', JSON
-      .stringify([...localFavoritesRecipes, currentFavoriteRecipe]));
+      .stringify([...localFavoritesRecipes, obj]));
     setIsFavorite(true);
   }
 };
