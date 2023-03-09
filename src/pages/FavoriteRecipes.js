@@ -15,15 +15,14 @@ function FavoriteRecipes() {
 
   useEffect(() => {
     const getFavRecipes = localStorage.getItem('favoriteRecipes');
-    const localFavRecipes = getFavRecipes ? JSON
-      .parse(getFavRecipes) : [];
+    const localFavRecipes = getFavRecipes && JSON
+      .parse(getFavRecipes);
     setFavRecies(localFavRecipes);
   }, []);
 
   const filterByAll = () => {
     const getFavRecipes = localStorage.getItem('favoriteRecipes');
     setFavRecies(JSON.parse(getFavRecipes));
-    console.log('Filtrando tudo');
   };
 
   const filterByMeal = () => {
