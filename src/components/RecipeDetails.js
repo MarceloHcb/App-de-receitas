@@ -44,7 +44,7 @@ function RecipeDetails() {
     .filter((el) => el.includes('strMeasure'));
   const measure = measureKeys.map((el) => data[pathname][0][el])
     .filter((el) => el !== null && el !== '');
-
+  console.log(history.location.pathname);
   return (
     <div>
       <div className="container-recipes">
@@ -59,13 +59,30 @@ function RecipeDetails() {
       {
         doneRecipes.some((el) => (el.id === id))
           ? '' : (
-            <button
-              className="button-start"
-              data-testid="start-recipe-btn"
-              onClick={ () => setInprogressRecipes([...inprogressRecipes, id]) }
-            >
-              {inprogressRecipes.includes(id) ? 'Start Recipe' : 'Continue Recipe'}
-            </button>
+            <>
+              <button
+                className="button-start"
+                data-testid="start-recipe-btn"
+                onClick={ () => {
+                  setInprogressRecipes([...inprogressRecipes, id]);
+                  history.push(`${id}/in-progress`);
+                } }
+              >
+                {inprogressRecipes.includes(id) ? 'Start Recipe' : 'Continue Recipe'}
+              </button>
+              <button
+                className="button-start btn-share"
+                data-testid="share-btn"
+              >
+                Share Recipe
+              </button>
+              <button
+                className="button-start btn-favorite"
+                data-testid="favorite-btn"
+              >
+                Favorite Recipe
+              </button>
+            </>
           )
       }
     </div>
