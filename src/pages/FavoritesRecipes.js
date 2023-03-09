@@ -6,7 +6,7 @@ function FavoriteRecipes() {
   const [favRecipes, setFavRecies] = useState([]);
 
   const removeFavRecipes = (id) => {
-    const getFavRecipes = localStorage.getItem('');
+    const getFavRecipes = localStorage.getItem('favoriteRecipes');
     const localFavRecipes = JSON.parse(getFavRecipes);
     localStorage.setItem('favoriteRecipes', JSON
       .stringify(localFavRecipes.filter((element) => element.id !== id)));
@@ -29,15 +29,13 @@ function FavoriteRecipes() {
   const filterByMeal = () => {
     const getFavRecipes = localStorage.getItem('favoriteRecipes');
     const localFavRecipes = JSON.parse(getFavRecipes);
-    setFavRecies(localFavRecipes.filter((element) => element.type === 'meals'));
-    console.log('Filtrando por comida');
+    setFavRecies(localFavRecipes.filter((element) => element.type === 'meal'));
   };
 
   const filterBydrinks = () => {
     const getFavRecipes = localStorage.getItem('favoriteRecipes');
     const localFavRecipes = JSON.parse(getFavRecipes);
-    setFavRecies(localFavRecipes.filter((element) => element.type === 'drinks'));
-    console.log('Filtrando por bebida');
+    setFavRecies(localFavRecipes.filter((element) => element.type === 'drink'));
   };
 
   return (
@@ -57,7 +55,7 @@ function FavoriteRecipes() {
         Drinks
       </button>
       <button
-        data-testid="filter-by-meals-btn"
+        data-testid="filter-by-meal-btn"
         onClick={ filterByMeal }
       >
         Meals
