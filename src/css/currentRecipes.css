@@ -147,3 +147,11 @@
   top: 95%;
   width: 332px;
 }
+
+.btn-share {
+  right: 60%;
+}
+
+.btn-favorite {
+  left: 60%;
+}

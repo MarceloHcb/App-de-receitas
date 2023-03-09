@@ -33,7 +33,7 @@ function App() {
         <Route exact path="/meals" component={ Meals } />
         <Route
           exact
-          path="/meals/:id-da-receita/in-progress"
+          path="/meals/:id/in-progress"
           component={ RecipeInProgress }
         />
         <Route exact path="/meals/:id" component={ RecipeDetails } />
