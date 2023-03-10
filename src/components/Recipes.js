@@ -8,17 +8,18 @@ function Recipes() {
   const [loading, setLoading] = useState(true);
   const { setUrl } = useContext(Context);
   const history = useHistory();
-  let url = '';
 
-  const rote = history.location.pathname;
-  const page = rote.replace('/', '');
-  if (history.location.pathname === '/meals') {
-    url = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
-  }
-  if (history.location.pathname === '/drinks') {
-    url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
-  }
   useEffect(() => {
+    let url = '';
+
+    const rote = history.location.pathname;
+    const page = rote.replace('/', '');
+    if (history.location.pathname === '/meals') {
+      url = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+    }
+    if (history.location.pathname === '/drinks') {
+      url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
+    }
     const fetchCategories = async () => {
       setLoading(true);
       const response = await fetch(url);
@@ -29,7 +30,7 @@ function Recipes() {
       setLoading(false);
     };
     fetchCategories();
-  }, [url, page]);
+  }, [history]);
   const handleAllclick = () => {
     setUrl('');
     setCurrentCategory([]);

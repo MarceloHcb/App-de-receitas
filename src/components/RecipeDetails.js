@@ -27,6 +27,7 @@ function RecipeDetails() {
   console.log(inprogressRecipes);
   console.log(id);
   const fetchUrl = async (url, setFunc) => {
+    console.log(url, 'categorias');
     const response = await fetch(url);
     const result = await response.json();
     setFunc(result);

@@ -142,6 +142,7 @@ function CurrentRecipes({ data, ingredients, measure, pathname,
                   {param.strInstructions}
 
                 </p>
+
                 <div className="carrousel">
                   { Object.values(recommendationsData)[0].slice(0, max)
                     .map((recommendations, index) => (

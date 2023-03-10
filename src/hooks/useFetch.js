@@ -10,6 +10,7 @@ const useFetch = (url) => {
       try {
         const response = await fetch(url);
         const json = await response.json();
+        console.log(json);
         setDataApi(json);
       } catch (e) {
         console.log(e);
