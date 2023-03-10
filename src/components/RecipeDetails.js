@@ -14,7 +14,6 @@ function RecipeDetails() {
   const localFavoritesRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const isFavorite = localFavoritesRecipes
     ?.some((el) => (el.id === id));
-  console.log(isFavorite);
   const [message, setMessage] = useState('');
   const [data, setData] = useState({ [pathname]: [{}] });
   const [favorite, setIsFavorite] = useState(isFavorite);
@@ -24,8 +23,6 @@ function RecipeDetails() {
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [inprogressRecipes, setInprogressRecipes] = useState([]);
   const timeNumber = 3000;
-  console.log(inprogressRecipes);
-  console.log(id);
   const fetchUrl = async (url, setFunc) => {
     console.log(url, 'categorias');
     const response = await fetch(url);
@@ -62,6 +59,7 @@ function RecipeDetails() {
     .filter((el) => el.includes('strMeasure'));
   const measure = measureKeys.map((el) => data[pathname][0][el])
     .filter((el) => el !== null && el !== '');
+  console.log(data);
   return (
     <div>
       <div className="container-recipes">
@@ -82,7 +80,11 @@ function RecipeDetails() {
                 data-testid="start-recipe-btn"
                 onClick={ () => {
                   setInprogressRecipes([...inprogressRecipes, id]);
-                  history.push(`${id}/in-progress`);
+                  // LocalRecipesInProgress(...data[pathname], id);
+                  history.push({
+                    pathname: `${id}/in-progress`,
+                    state: data,
+                  });
                 } }
               >
                 {inprogressRecipes.includes(id) ? 'Start Recipe' : 'Continue Recipe'}

@@ -10,7 +10,6 @@ import DoneRecipes from './pages/DoneRecipes';
 import RecipeInProgress from './pages/RecipeInProgress';
 import Drinks from './pages/Drinks';
 import RecipeDetails from './components/RecipeDetails';
-import DrinksDetails from './pages/DrinksDetails';
 import Meals from './pages/Meals';
 
 function App() {
@@ -26,24 +25,23 @@ function App() {
       </object> */}
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route exact path="/profile" component={ Profile } />
-        <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
-        <Route exact path="/done-recipes" component={ DoneRecipes } />
         <Route exact path="/meals" component={ Meals } />
+        <Route exact path="/meals/:id" component={ RecipeDetails } />
         <Route
           exact
           path="/meals/:id/in-progress"
           component={ RecipeInProgress }
         />
-        <Route exact path="/meals/:id" component={ RecipeDetails } />
+        <Route exact path="/drinks" component={ Drinks } />
         <Route exact path="/drinks/:id" component={ RecipeDetails } />
         <Route
           exact
           path="/drinks/:id/in-progress"
           component={ RecipeInProgress }
         />
-        <Route exact path="/drinks/:id" component={ DrinksDetails } />
-        <Route exact path="/drinks" component={ Drinks } />
+        <Route exact path="/profile" component={ Profile } />
+        <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
+        <Route exact path="/done-recipes" component={ DoneRecipes } />
       </Switch>
     </div>
   );
