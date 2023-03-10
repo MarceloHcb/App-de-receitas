@@ -25,25 +25,36 @@ function SearchBar({ inputSearch }) {
       url = DRINKS_URL;
     }
 
-    switch (results) {
-    case 'Ingredient':
-      setUrl(`${url}filter.php?i=${inputSearch}`);
-
-      break;
-    case 'Name':
-      setUrl(`${url}search.php?s=${inputSearch}`);
-
-      break;
-    case 'First letter':
-      if (inputSearch.length !== 1) {
-        global.alert('Your search must have only 1 (one) character');
-      }
-      setUrl(`${url}search.php?f=${inputSearch}`);
-
-      break;
-    default:
-      return true;
+    if (results === 'Ingredient') {
+      return setUrl(`${url}filter.php?i=${inputSearch}`);
     }
+    if (results === 'Name') {
+      return setUrl(`${url}search.php?s=${inputSearch}`);
+    }
+    if (inputSearch.length !== 1) {
+      return global.alert('Your search must have only 1 (one) character');
+    }
+    return setUrl(`${url}search.php?f=${inputSearch}`);
+    // switch (results) {
+    // case 'Ingredient':
+    //   setUrl(`${url}filter.php?i=${inputSearch}`);
+    //   console.log(results);
+
+    //   break;
+    // case 'Name':
+    //   setUrl(`${url}search.php?s=${inputSearch}`);
+
+    //   break;
+    // case 'First letter':
+    //   if (inputSearch.length !== 1) {
+    //     global.alert('Your search must have only 1 (one) character');
+    //   }
+    //   setUrl(`${url}search.php?f=${inputSearch}`);
+
+    //   break;
+    // default:
+    //   return true;
+    // }
   };
 
   return (
