@@ -5,13 +5,6 @@ import { renderWithRouter } from '../helpers/renderWith';
 import Provider from '../context/Provider';
 import fetch from '../../cypress/mocks/fetch';
 
-// const filters = ['ingredient-search-radio', 'name-search-radio', 'first-letter-search-radio'];
-// const buttonSearch = 'search-top-btn';
-// const searchInput = 'search-input';
-// const buttonSearch2 = 'exec-search-btn';
-// const meal = {
-//   idMeal: 1,
-// };
 const searchButtonId = 'search-top-btn';
 const searchInputId = 'search-input';
 const submitId = 'exec-search-btn';
@@ -211,11 +204,6 @@ describe('Testa componente SearchBar', () => {
     const searchBar = screen.getByTestId(submitId);
     expect(searchBar).toBeInTheDocument();
     userEvent.click(searchBar);
-
-    // await waitFor(() => {
-    //   const currentPath = history.location.pathname;
-    //   expect(currentPath).toBe('/drinks/178332');
-    // });
   });
   it('', async () => {
     const { history } = renderWithRouter(
