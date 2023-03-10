@@ -19,7 +19,7 @@ function Provider({ children }) {
   }
   const result = url === '' ? url1 : url;
   const { dataApi, setDataApi, loading } = useFetch(result);
-
+  console.log(dataApi);
   const contextValue = useMemo(() => ({
     url,
     inputSearch,

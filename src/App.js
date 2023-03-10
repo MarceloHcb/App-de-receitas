@@ -10,7 +10,6 @@ import DoneRecipes from './pages/DoneRecipes';
 import RecipeInProgress from './pages/RecipeInProgress';
 import Drinks from './pages/Drinks';
 import RecipeDetails from './components/RecipeDetails';
-import DrinksInProgress from './pages/DrinksInProgress';
 import DrinksDetails from './pages/DrinksDetails';
 import Meals from './pages/Meals';
 
@@ -41,7 +40,7 @@ function App() {
         <Route
           exact
           path="/drinks/:id/in-progress"
-          component={ DrinksInProgress }
+          component={ RecipeInProgress }
         />
         <Route exact path="/drinks/:id" component={ DrinksDetails } />
         <Route exact path="/drinks" component={ Drinks } />
