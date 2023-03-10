@@ -35,7 +35,7 @@ function RecipeInProgress() {
     };
     progressFetch();
   }, [id, pathname]);
-
+  console.log(resultData);
   return (
     <div>
 
@@ -51,8 +51,34 @@ function RecipeInProgress() {
             <h1 data-testid="recipe-title">
               { resultData[0].strMeal
         || resultData[0].strDrink }
-
             </h1>
+            <h2>Ingredients</h2>
+            <ul>
+              {Object.keys(resultData[0])
+                .filter((el) => el.includes('Ingredient'))
+                .map((el, index) => {
+                  if (resultData[0][el] !== '' && resultData[0][el] !== null) {
+                    return (
+                      <li
+                        key={ index }
+                        data-testid={ `${index}-ingredient-step` }
+                      >
+                        <label htmlFor={ `checkbox${index}` }>
+                          <input
+                            type="checkbox"
+                            id={ `checkbox${index}` }
+                            className="input-checkbox"
+                          />
+                          { resultData[0][el]}
+                        </label>
+                      </li>
+                    );
+                  }
+                  return null;
+                })}
+
+            </ul>
+
             <h2 data-testid="recipe-category">{ resultData[0].strCategory }</h2>
             <h3>Instructions</h3>
             {resultData[0].strInstructions
