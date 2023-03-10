@@ -109,4 +109,34 @@ describe('Testa componente Recipes', () => {
 
     expect(aceBtn).toBeInTheDocument();
   });
+  it('', async () => {
+    const { history } = renderWithRouter(
+      <Provider>
+        <App />
+      </Provider>,
+    );
+    act(() => {
+      history.push('/meals');
+    });
+
+    const beefBtn = await screen.findByRole('button', {
+      name: /beef/i,
+    });
+    expect(beefBtn).toBeInTheDocument();
+
+    userEvent.click(beefBtn);
+
+    const beefStro = await screen.findByRole('button', {
+      name: /beef stroganoff beef stroganoff/i,
+    });
+    expect(beefStro).toBeInTheDocument();
+
+    expect(beefBtn).toBeInTheDocument();
+    userEvent.click(beefBtn);
+
+    const timbitsBtn = await screen.findByRole('img', {
+      name: /timbits/i,
+    });
+    expect(timbitsBtn).toBeInTheDocument();
+  });
 });
