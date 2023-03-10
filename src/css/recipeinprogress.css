@@ -2,3 +2,9 @@
   margin-bottom: 100px;
   padding: 10px;
 }
+
+.input-checkbox {
+  height: 15px;
+  margin: 0 10px;
+  width: 15px;
+}
