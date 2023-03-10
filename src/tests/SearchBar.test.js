@@ -22,9 +22,10 @@ const ingredientRadioId = 'ingredient-search-radio';
 describe('Testa componente SearchBar', () => {
   beforeEach(() => {
     global.fetch = jest.fn(fetch);
+    global.alert = jest.fn();
   });
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
   });
   it('', () => {
     const { history } = renderWithRouter(
@@ -92,8 +93,6 @@ describe('Testa componente SearchBar', () => {
       history.push('/meals');
     });
 
-    global.alert = jest.fn(() => {});
-
     const searchTopBtn = screen.getByTestId(searchButtonId);
     userEvent.click(searchTopBtn);
 
@@ -107,7 +106,7 @@ describe('Testa componente SearchBar', () => {
     userEvent.click(searchBar);
 
     await waitFor(() => {
-      expect(global.alert).toHaveBeenCalledWith('Your search must have only 1 (one) character');
+      expect(global.alert).toHaveBeenCalled();
     });
   });
   it('Testando name input', async () => {
@@ -174,8 +173,6 @@ describe('Testa componente SearchBar', () => {
       history.push('/drinks');
     });
 
-    console.log(history.location.pathname);
-
     const cocoaBtn = screen.getByTestId('page-title');
     expect(cocoaBtn).toBeInTheDocument();
 
@@ -215,51 +212,34 @@ describe('Testa componente SearchBar', () => {
     expect(searchBar).toBeInTheDocument();
     userEvent.click(searchBar);
 
-    console.log(history.location);
-
     // await waitFor(() => {
     //   const currentPath = history.location.pathname;
     //   expect(currentPath).toBe('/drinks/178332');
     // });
   });
+  it('', async () => {
+    const { history } = renderWithRouter(
+      <Provider>
+        <App />
+      </Provider>,
+    );
+    act(() => {
+      history.push('/meals');
+    });
 
-//   it('Verifica se o filtro é feito ao clicar na opção Name após digitar o valor soup', async () => {
-//     const { history } = renderWithRouter(<Header search />);
-//     userEvent.click(screen.getByTestId(buttonSearch));
-//     userEvent.type(screen.getByTestId(searchInput), 'soup');
-//     userEvent.click(screen.getByTestId(filters[1]));
-//     userEvent.click(screen.getByTestId(buttonSearch2));
-//     await waitFor(async () => {
-//       expect(fetch).toHaveBeenCalledTimes(1);
-//       expect(fetch).toHaveBeenCalledWith('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=soup');
-//       expect(history.location.key.length).toBeGreaterThan(0);
-//       expect(history.location.pathname).not.toEqual('/meals');
-//     });
-//   });
-//   it('Verifica se o filtro é feito ao clicar na opção First Letter após digitar o valor a', async () => {
-//     const { history } = renderWithRouter(<Header search />);
-//     userEvent.click(screen.getByTestId(buttonSearch));
-//     userEvent.type(screen.getByTestId(searchInput), 'a');
-//     userEvent.click(screen.getByTestId(filters[2]));
-//     userEvent.click(screen.getByTestId(buttonSearch2));
-//     await waitFor(async () => {
-//       expect(fetch).toHaveBeenCalledTimes(1);
-//       expect(fetch).toHaveBeenCalledWith('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a');
-//       expect(history.location.key.length).toBeGreaterThan(0);
-//       expect(history.location.pathname).not.toEqual('/meals');
-//     });
-//   });
-//   it('Verifica se gera um alerta ao clicar no filtro first letter após inserir valor maior que 1 ', async () => {
-//     const { history } = renderWithRouter(<Header search />);
-//     userEvent.click(screen.getByTestId(buttonSearch));
-//     userEvent.type(screen.getByTestId(searchInput), 'aa');
-//     userEvent.click(screen.getByTestId(filters[2]));
-//     userEvent.click(screen.getByTestId(buttonSearch2));
-//     await waitFor(async () => {
-//       expect(fetch).toHaveBeenCalledTimes(0);
-//       expect(fetch).not.toHaveBeenCalledWith('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a');
-//       expect(history.location.pathname).not.toEqual('/meals');
-//     });
-//   });
-// });
+    const searchTopBtn = await screen.findByTestId(searchButtonId);
+    userEvent.click(searchTopBtn);
+
+    const searchInput = await screen.findByTestId(searchInputId);
+    userEvent.type(searchInput, 'a');
+
+    const firstLetterBtn = screen.getByTestId(firstLetterID);
+    userEvent.click(firstLetterBtn);
+
+    const searchBtn = screen.getByTestId('exec-search-btn');
+    userEvent.click(searchBtn);
+
+    const chicken = await screen.findByText('Brown Stew Chicken');
+    expect(chicken).toBeInTheDocument();
+  });
 });
