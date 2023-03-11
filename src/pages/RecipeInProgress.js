@@ -8,14 +8,9 @@ function RecipeInProgress() {
   const pathname = history.location.pathname.includes('meals') ? 'meals' : 'drinks';
   const params = useParams();
   const { dataApi } = useContext(Context);
-  console.log(dataApi);
   const { id } = params;
-  console.log(history.location.pathname);
   const idParam = history.location.pathname.includes('meals') ? 'idMeal' : 'idDrinks';
   const data = dataApi && dataApi[pathname].filter((el) => el[idParam] === id);
-  console.log(data);
-  console.log(id);
-
   return (
     <div className="container">
       <img

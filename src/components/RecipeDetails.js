@@ -17,14 +17,11 @@ function RecipeDetails() {
   const [message, setMessage] = useState('');
   const [data, setData] = useState({ [pathname]: [{}] });
   const [favorite, setIsFavorite] = useState(isFavorite);
-  console.log(favorite);
-
   const [recommendationsData, setRecommendationsData] = useState({ [pathname]: [{}] });
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [inprogressRecipes, setInprogressRecipes] = useState([]);
   const timeNumber = 3000;
   const fetchUrl = async (url, setFunc) => {
-    console.log(url, 'categorias');
     const response = await fetch(url);
     const result = await response.json();
     setFunc(result);
@@ -59,7 +56,6 @@ function RecipeDetails() {
     .filter((el) => el.includes('strMeasure'));
   const measure = measureKeys.map((el) => data[pathname][0][el])
     .filter((el) => el !== null && el !== '');
-  console.log(data);
   return (
     <div>
       <div className="container-recipes">
