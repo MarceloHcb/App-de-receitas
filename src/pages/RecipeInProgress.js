@@ -4,17 +4,23 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import '../css/recipeinprogress.css';
-import { LocalStorage } from '../helpers/localStorage';
+import { LocalRecipesInProgress, LocalStorage } from '../helpers/localStorage';
 
 function RecipeInProgress() {
   const history = useHistory();
   const params = useParams();
   const pathname = history.location.pathname.includes('meals') ? 'meals' : 'drinks';
+
   const [message, setMessage] = useState('');
   const [data, setData] = useState([]);
+  const getLocal = JSON.parse(localStorage.getItem('inProgressRecipes'))
+    ?.map(({ targetId }) => targetId);
+
+  const [checkeds, setChecked] = useState([getLocal]);
+  console.log(checkeds);
   const [loading, setLoading] = useState(true);
+
   const { id } = params;
-  console.log(pathname);
   const localFavoritesRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const favorite = localFavoritesRecipes
     ?.some((el) => (el.id === id));
@@ -24,6 +30,17 @@ function RecipeInProgress() {
     setTimeout(() => setMessage(''), timeNumber);
   }
   const resultData = data[pathname];
+
+  const handleIngredientsChange = ({ target }) => {
+    const { checked } = target;
+    if (checkeds?.includes(target.id)) {
+      setChecked(checkeds.filter((el) => el !== target.id));
+      LocalRecipesInProgress(checked, target.id, id);
+      return;
+    }
+    setChecked([...checkeds, target.id]);
+    LocalRecipesInProgress(checked, target.id, id);
+  };
   useEffect(() => {
     const progressFetch = async () => {
       setLoading(true);
@@ -36,24 +53,27 @@ function RecipeInProgress() {
     progressFetch();
   }, [id, pathname]);
   console.log(resultData);
-  return (
-    <div>
 
-      {loading
-        ? <h1>Loading...</h1> : (
+  const isChecked = (el) => checkeds?.includes(el) || false;
+  return (
+    <div className="container-progress">
+      <h1 className="title-progress">RECIPES IN PROGRESS</h1>
+      {!loading
+        && (
           <div className="container">
+            <h1 data-testid="recipe-title" className="recipe-title">
+              { resultData[0].strMeal
+        || resultData[0].strDrink }
+            </h1>
             <img
+              className="img"
               src={ pathname === 'meals'
                 ? resultData[0].strMealThumb : resultData[0].strDrinkThumb }
               data-testid="recipe-photo"
               alt="recipe"
             />
-            <h1 data-testid="recipe-title">
-              { resultData[0].strMeal
-        || resultData[0].strDrink }
-            </h1>
-            <h2>Ingredients</h2>
-            <ul>
+            <h2 className="deltails-titles">INGREDIENTS</h2>
+            <ul className="ingredients-progress">
               {Object.keys(resultData[0])
                 .filter((el) => el.includes('Ingredient'))
                 .map((el, index) => {
@@ -61,15 +81,24 @@ function RecipeInProgress() {
                     return (
                       <li
                         key={ index }
-                        data-testid={ `${index}-ingredient-step` }
                       >
-                        <label htmlFor={ `checkbox${index}` }>
+                        <label
+                          htmlFor={ el }
+                          style={ { textDecoration: isChecked(el)
+                            ? 'line-through solid rgb(0, 0, 0)' : '' } }
+                          data-testid={ `${index}-ingredient-step` }
+
+                        >
                           <input
                             type="checkbox"
-                            id={ `checkbox${index}` }
+                            id={ el }
+                            checked={ isChecked(el) }
                             className="input-checkbox"
+                            onChange={ handleIngredientsChange }
                           />
+
                           { resultData[0][el]}
+
                         </label>
                       </li>
                     );
@@ -79,10 +108,16 @@ function RecipeInProgress() {
 
             </ul>
 
-            <h2 data-testid="recipe-category">{ resultData[0].strCategory }</h2>
-            <h3>Instructions</h3>
+            <h2
+              data-testid="recipe-category"
+              className="deltails-titles"
+            >
+              { resultData[0].strCategory }
+
+            </h2>
+            <h3 className="deltails-titles">INSTRUCTIONS</h3>
             {resultData[0].strInstructions
-              .split(' ')
+              .split('  ')
               .map((el, index) => (el.includes('.')
                 ? (<p key={ index }>{el}</p>)
                 : (
@@ -93,7 +128,7 @@ function RecipeInProgress() {
               ))}
             <p data-testid="instructions">{ resultData[0].strInstructions }</p>
             <button
-              className="button-start btn-share"
+              className="btn-share"
               data-testid="share-btn"
               onClick={ () => {
                 navigator.clipboard.writeText(`http://localhost:3000${history.location.pathname}`)
@@ -113,7 +148,7 @@ function RecipeInProgress() {
             </button>
             <button
               onClick={ () => LocalStorage(...data[pathname], id, setIsFavorite) }
-              className="button-start btn-favorite"
+              className="btn-favorite"
             >
               <img
                 data-testid="favorite-btn"

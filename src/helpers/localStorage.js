@@ -39,13 +39,22 @@ export const LocalStorage = (
   }
 };
 
-// export const LocalRecipesInProgress = (data, id) => {
-//   const recipeInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
-//   if (recipeInProgress === null) {
-//     localStorage.setItem('inProgressRecipes', JSON.stringify([{ data, id }]));
-//   }
-//   if (recipeInProgress) {
-//     localStorage
-//       .setItem('inProgressRecipes', JSON.stringify([...recipeInProgress, { data, id }]));
-//   }
-// };
+export const LocalRecipesInProgress = (checked, targetId, id) => {
+  const recipeInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  console.log(recipeInProgress);
+  if (checked) {
+    if (recipeInProgress === null) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify([{ targetId, id }]));
+    }
+    if (recipeInProgress) {
+      localStorage
+        .setItem('inProgressRecipes', JSON
+          .stringify([...recipeInProgress, { targetId, id }]));
+    }
+  } else {
+    const newEl = recipeInProgress.filter((el) => el.id === id);
+    localStorage
+      .setItem('inProgressRecipes', JSON
+        .stringify(newEl.filter((el) => el.targetId !== targetId)));
+  }
+};

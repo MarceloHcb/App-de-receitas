@@ -1,0 +1,53 @@
+.header {
+  align-items: center;
+  background-color: #fcc436;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  padding: 13px;
+  width: 100%;
+}
+
+.title {
+  color: rgb(72, 72, 72);
+  margin-bottom: 20px;
+  margin-top: 0;
+  text-align: center;
+  width: 100%;
+}
+
+.title img {
+  height: 30px;
+  width: auto;
+}
+
+.title h1 {
+  font-size: 2em;
+}
+
+.header-button div:first-child {
+  float: left;
+}
+
+.header-button div:last-child {
+  float: right;
+}
+
+.search-busque {
+  bottom: 0;
+  margin-top: 80px;
+  padding: 10px;
+  text-align: center;
+}
+
+.hearder-icons {
+  align-items: center;
+  background-color: #fcc436;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 48px;
+  width: 95%;
+}
+

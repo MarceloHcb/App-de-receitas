@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import SearchBar from './SearchBar';
 import searchIcon from '../images/searchIcon.svg';
+import '../css/header.css';
 
 function Header({ search }) {
   const history = useHistory();
@@ -19,40 +20,53 @@ function Header({ search }) {
 
   return (
     <header>
-      <h1 data-testid="page-title">
-        {
-          pageTitle.charAt(0).toUpperCase() + pageTitle.slice(1)
-        }
-      </h1>
-      <button
-        type="button"
-        onClick={ () => history.push('/profile') }
-      >
-        <img
-          src={ profileIcon }
-          alt=""
-          data-testid="profile-top-btn"
-        />
-      </button>
-      {search
+
+      <div className="header">
+        <div className="title">
+          <h1 data-testid="page-title">
+            {
+              pageTitle.charAt(0).toUpperCase() + pageTitle.slice(1)
+            }
+          </h1>
+
+        </div>
+        <div className="hearder-icons">
+          <button
+            type="button"
+            className="header-button"
+            onClick={ handleClickToProfile }
+          >
+            <img
+              className="search-icon"
+              src={ profileIcon }
+              alt=""
+              data-testid="profile-top-btn"
+            />
+          </button>
+          {search
       && (
         <button
           type="button"
+          className="header-button"
           onClick={ () => setShowBar(!showBar) }
         >
           <img
+            className="search-icon"
             data-testid="search-top-btn"
             src={ searchIcon }
             alt="Search Icon"
           />
         </button>
       )}
+        </div>
+      </div>
       {
         showBar
         && (
           <>
             <input
               type="text"
+              className="search-busque"
               placeholder="Busque"
               value={ inputSearch }
               data-testid="search-input"

@@ -61,7 +61,7 @@ function SearchBar({ inputSearch }) {
       <form className="form">
         <label htmlFor="Ingredient" className="text-label">
           <input
-            className="radio_btn_search"
+            className="input-text"
             data-testid="ingredient-search-radio"
             type="radio"
             name="results"
@@ -74,7 +74,7 @@ function SearchBar({ inputSearch }) {
 
         <label htmlFor="Name">
           <input
-            className="radio_btn_search"
+            className="input-text"
             type="radio"
             name="results"
             id="Name"
@@ -87,7 +87,7 @@ function SearchBar({ inputSearch }) {
 
         <label htmlFor="First letter">
           <input
-            className="radio_btn_search"
+            className="input-text"
             type="radio"
             name="results"
             id="First letter"
