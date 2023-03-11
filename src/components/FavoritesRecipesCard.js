@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
-import unFavoriteIcon from '../images/whiteHeartIcon.svg';
+import unFavoriteIcon from '../images/blackHeartIcon.svg';
+import '../css/favRecipeImg.css';
 
 function FavoriteRecipesCard({ index, favorite, removeFavRecipes }) {
   const history = useHistory();
   const { image, category, name, nationality, type, alcoholicOrNot, id } = favorite;
   const [linkCopy, setLinkCopy] = useState(false);
 
-  const path = type === 'meal' ? 'meals' : 'drink';
+  const path = type === 'meal' ? 'meals' : 'drinks';
 
   const sharedButton = () => {
     if (type === 'drink') {
@@ -27,16 +28,22 @@ function FavoriteRecipesCard({ index, favorite, removeFavRecipes }) {
         onClick={ () => history.push(`${path}/${id}`) }
       >
         <img
+          className="favRecipeImg"
           src={ image }
           alt=""
           data-testid={ `${index}-horizontal-image` }
         />
       </button>
-      <h2
-        data-testid={ `${index}-horizontal-name` }
+      <button
+        onClick={ () => history.push(`${path}/${id}`) }
       >
-        { name }
-      </h2>
+        <h2
+          data-testid={ `${index}-horizontal-name` }
+        >
+          { name }
+        </h2>
+      </button>
+
       <p
         data-testid={ `${index}-horizontal-top-text` }
       >
@@ -46,7 +53,7 @@ function FavoriteRecipesCard({ index, favorite, removeFavRecipes }) {
             : alcoholicOrNot
         }
       </p>
-      {linkCopy ? <p>Link Copied!</p> : ''}
+      {linkCopy ? <p>Link copied!</p> : ''}
       <button
         onClick={ sharedButton }
       >
@@ -60,7 +67,7 @@ function FavoriteRecipesCard({ index, favorite, removeFavRecipes }) {
         onClick={ () => removeFavRecipes(id) }
       >
         <img
-          data-testid={ `${index}-horizontal-favorit-btn` }
+          data-testid={ `${index}-horizontal-favorite-btn` }
           src={ unFavoriteIcon }
           alt=""
         />

@@ -6,7 +6,7 @@ function FavoriteRecipes() {
   const [favRecipes, setFavRecies] = useState([]);
 
   const removeFavRecipes = (id) => {
-    const getFavRecipes = localStorage.getItem('');
+    const getFavRecipes = localStorage.getItem('favoriteRecipes');
     const localFavRecipes = JSON.parse(getFavRecipes);
     localStorage.setItem('favoriteRecipes', JSON
       .stringify(localFavRecipes.filter((element) => element.id !== id)));
@@ -15,35 +15,32 @@ function FavoriteRecipes() {
 
   useEffect(() => {
     const getFavRecipes = localStorage.getItem('favoriteRecipes');
-    const localFavRecipes = getFavRecipes ? JSON
-      .parse(getFavRecipes) : [];
+    const localFavRecipes = getFavRecipes && JSON
+      .parse(getFavRecipes);
     setFavRecies(localFavRecipes);
   }, []);
 
   const filterByAll = () => {
     const getFavRecipes = localStorage.getItem('favoriteRecipes');
     setFavRecies(JSON.parse(getFavRecipes));
-    console.log('Filtrando tudo');
   };
 
   const filterByMeal = () => {
     const getFavRecipes = localStorage.getItem('favoriteRecipes');
     const localFavRecipes = JSON.parse(getFavRecipes);
-    setFavRecies(localFavRecipes.filter((element) => element.type === 'meals'));
-    console.log('Filtrando por comida');
+    setFavRecies(localFavRecipes.filter((element) => element.type === 'meal'));
   };
 
   const filterBydrinks = () => {
     const getFavRecipes = localStorage.getItem('favoriteRecipes');
     const localFavRecipes = JSON.parse(getFavRecipes);
-    setFavRecies(localFavRecipes.filter((element) => element.type === 'drinks'));
-    console.log('Filtrando por bebida');
+    setFavRecies(localFavRecipes.filter((element) => element.type === 'drink'));
   };
 
   return (
     <div>
-      <h1 data-testid="page-title">Favorite Recipes</h1>
       <Header />
+      <h1 data-testid="page-title">Favorite Recipes</h1>
       <button
         data-testid="filter-by-all-btn"
         onClick={ filterByAll }
@@ -57,12 +54,12 @@ function FavoriteRecipes() {
         Drinks
       </button>
       <button
-        data-testid="filter-by-meals-btn"
+        data-testid="filter-by-meal-btn"
         onClick={ filterByMeal }
       >
         Meals
       </button>
-      {favRecipes.map((element, index) => (
+      {favRecipes && favRecipes.map((element, index) => (
         <FavoriteRecipesCard
           key={ index }
           index={ index }

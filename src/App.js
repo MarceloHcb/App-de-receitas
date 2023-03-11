@@ -5,7 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
-import FavoriteRecipes from './pages/FavoritesRecipes';
+import FavoriteRecipes from './pages/FavoriteRecipes';
 import DoneRecipes from './pages/DoneRecipes';
 import RecipeInProgress from './pages/RecipeInProgress';
 import Drinks from './pages/Drinks';
