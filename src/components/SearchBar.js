@@ -38,7 +38,6 @@ function SearchBar({ inputSearch }) {
     // switch (results) {
     // case 'Ingredient':
     //   setUrl(`${url}filter.php?i=${inputSearch}`);
-    //   console.log(results);
 
     //   break;
     // case 'Name':
