@@ -15,7 +15,6 @@ export const LocalStorage = (
   const localFavoritesRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const localDuplicateId = localFavoritesRecipes
     ?.some((el) => (el.id === id));
-
   if (localFavoritesRecipes && localDuplicateId) {
     if (localFavoritesRecipes.some((el) => el.id === id)) {
       localStorage.setItem('favoriteRecipes', JSON
@@ -39,3 +38,14 @@ export const LocalStorage = (
     setIsFavorite(true);
   }
 };
+
+// export const LocalRecipesInProgress = (data, id) => {
+//   const recipeInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+//   if (recipeInProgress === null) {
+//     localStorage.setItem('inProgressRecipes', JSON.stringify([{ data, id }]));
+//   }
+//   if (recipeInProgress) {
+//     localStorage
+//       .setItem('inProgressRecipes', JSON.stringify([...recipeInProgress, { data, id }]));
+//   }
+// };
