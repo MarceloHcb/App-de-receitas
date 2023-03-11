@@ -16,7 +16,6 @@ export const LocalStorage = (
   const localDuplicateId = localFavoritesRecipes
     ?.some((el) => (el.id === id));
 
-  console.log(localFavoritesRecipes);
   if (localFavoritesRecipes && localDuplicateId) {
     if (localFavoritesRecipes.some((el) => el.id === id)) {
       localStorage.setItem('favoriteRecipes', JSON
