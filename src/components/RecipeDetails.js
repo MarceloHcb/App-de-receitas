@@ -4,7 +4,7 @@ import CurrentRecipes from './CurrentRecipes';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import { LocalStorage } from '../helpers/localStorage';
+import { LocalRecipesInProgress, LocalStorage } from '../helpers/localStorage';
 
 function RecipeDetails() {
   const history = useHistory();
@@ -80,7 +80,7 @@ function RecipeDetails() {
                 data-testid="start-recipe-btn"
                 onClick={ () => {
                   setInprogressRecipes([...inprogressRecipes, id]);
-                  // LocalRecipesInProgress(...data[pathname], id);
+                  LocalRecipesInProgress(...data[pathname], id);
                   history.push({
                     pathname: `${id}/in-progress`,
                     state: data,
@@ -90,7 +90,7 @@ function RecipeDetails() {
                 {inprogressRecipes.includes(id) ? 'Start Recipe' : 'Continue Recipe'}
               </button>
               <button
-                className="button-start btn-share"
+                className="btn-share"
                 data-testid="share-btn"
                 onClick={ () => {
                   navigator.clipboard.writeText(`http://localhost:3000${history.location.pathname}`)
@@ -102,7 +102,7 @@ function RecipeDetails() {
               </button>
               <button
                 onClick={ () => LocalStorage(...data[pathname], id, setIsFavorite) }
-                className="button-start btn-favorite"
+                className="btn-favorite"
               >
                 <img
                   data-testid="favorite-btn"

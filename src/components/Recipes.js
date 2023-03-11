@@ -57,7 +57,7 @@ function Recipes() {
     }
   };
   return (
-    <div>
+    <div className="category-icons">
       {!loading && categories?.map((category, index) => (
         <button
           type="button"

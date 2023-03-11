@@ -6,10 +6,8 @@
 .form {
   align-items: center;
   background-color: rgb(130, 148, 96);
-  border-radius: 8px;
-  display: fixed;
-  flex-direction: column;
-  font-size: 1em;
+  border-radius: 0 0 10px 10px;
+  margin-bottom: 100px;
 }
 
 .form-control {
@@ -18,20 +16,14 @@
 }
 
 .text-label {
-  margin-bottom: 5px;
-  width: 170px;
+  margin-bottom: 15px;
+  width: 160px;
 }
 
 .form div {
   display: flex;
   justify-content: center;
   width: 50px;
-}
-
-.radio_btn_search {
-  display: fixed;
-  margin-left: 56px;
-  margin-right: 5px;
 }
 
 .form div label {
@@ -43,7 +35,18 @@
   background-color: 4px 4px rgba(0, 0, 0, 0.2);
   color: hsl(0, 17%, 98%);
   margin: 10px;
-  margin-left: 65px;
+  margin-left: 45px;
   padding: 8px;
   width: 80%;
 }
+
+.input-text {
+  align-items: center;
+  background-color: 4px 4px rgba(0, 0, 0, 0.2);
+  border: none;
+  border-radius: 10px;
+  color: hsl(0, 17%, 98%);
+  margin: 10px;
+  margin-left: 45px;
+}
+
