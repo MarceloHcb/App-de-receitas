@@ -34,10 +34,12 @@
 }
 
 .search-busque {
+  border: none;
   bottom: 0;
   margin-top: 80px;
   padding: 10px;
   text-align: center;
+  width: 100%;
 }
 
 .hearder-icons {

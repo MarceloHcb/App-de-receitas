@@ -44,7 +44,7 @@ function Login() {
     <div className="login_container">
       <div className="bg_container" />
       <img className="logo" src={ logo } alt="logo" />
-      <h1 className="descricao">As melhores receitas</h1>
+      {/* <h1 className="descricao">As melhores receitas</h1> */}
       <img className="receitas" src={ recipes } alt="recipesy" />
 
       <form className="form_login">

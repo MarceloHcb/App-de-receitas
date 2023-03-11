@@ -14,10 +14,8 @@ function RecipeInProgress() {
   const [message, setMessage] = useState('');
   const [data, setData] = useState([]);
   const getLocal = JSON.parse(localStorage.getItem('inProgressRecipes'))
-    ?.map(({ targetId }) => targetId);
-
-  const [checkeds, setChecked] = useState([getLocal]);
-  console.log(checkeds);
+    ?.filter(({ id }) => id === params.id).map(({ targetId }) => targetId) || [];
+  const [checkeds, setChecked] = useState([...getLocal]);
   const [loading, setLoading] = useState(true);
 
   const { id } = params;
@@ -53,7 +51,7 @@ function RecipeInProgress() {
     progressFetch();
   }, [id, pathname]);
   console.log(resultData);
-
+  console.log(history.location.pathname.replace('/in-progress', ''));
   const isChecked = (el) => checkeds?.includes(el) || false;
   return (
     <div className="container-progress">
@@ -131,7 +129,7 @@ function RecipeInProgress() {
               className="btn-share"
               data-testid="share-btn"
               onClick={ () => {
-                navigator.clipboard.writeText(`http://localhost:3000${history.location.pathname}`)
+                navigator.clipboard.writeText(`http://localhost:3000${history.location.pathname.replace('/in-progress', '')}`)
                   .then(() => setMessage('Link copied!'));
               } }
             >
