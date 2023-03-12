@@ -23,10 +23,10 @@ function RecipeInProgress() {
   const favorite = localFavoritesRecipes
     ?.some((el) => (el.id === id));
   const [isFavorite, setIsFavorite] = useState(favorite);
-  const timeNumber = 3000;
-  if (message) {
-    setTimeout(() => setMessage(''), timeNumber);
-  }
+  // const timeNumber = 3000;
+  // if (message) {
+  //   setTimeout(() => setMessage(''), timeNumber);
+  // }
   const resultData = data[pathname];
 
   const handleIngredientsChange = ({ target }) => {
@@ -50,7 +50,6 @@ function RecipeInProgress() {
     };
     progressFetch();
   }, [id, pathname]);
-  console.log(resultData);
   const ingredientsList = resultData && Object.keys(resultData[0])
     .filter((el) => el.includes('Ingredient'))
     .filter((el) => resultData[0][el]);
@@ -134,8 +133,8 @@ function RecipeInProgress() {
               className="btn-share"
               data-testid="share-btn"
               onClick={ () => {
-                navigator.clipboard.writeText(`http://localhost:3000${history.location.pathname.replace('/in-progress', '')}`)
-                  .then(() => setMessage('Link copied!'));
+                navigator.clipboard.writeText(`http://localhost:3000${history.location.pathname.replace('/in-progress', '')}`);
+                setMessage('Link copied!');
               } }
             >
               <img src={ shareIcon } alt="share" />

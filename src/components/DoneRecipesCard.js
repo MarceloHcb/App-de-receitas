@@ -4,7 +4,6 @@ import shareIcon from '../images/shareIcon.svg';
 import '../css/recipeinprogress.css';
 
 const data = JSON.parse(localStorage.getItem('doneRecipes'));
-console.log(data);
 
 function DoneRecipesCard() {
   const [message, setMessage] = useState('');

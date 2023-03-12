@@ -60,9 +60,7 @@ export const LocalRecipesInProgress = (checked, targetId, id) => {
 
 export const LocalRecipesDone = (pathname, id, resultData) => {
   const recipeDone = JSON.parse(localStorage.getItem('doneRecipes'));
-  console.log(resultData);
   const tags = resultData.strTags?.split(',') || [];
-  console.log(tags);
   const obj = {
     id,
     nationality: resultData.strArea || '',
