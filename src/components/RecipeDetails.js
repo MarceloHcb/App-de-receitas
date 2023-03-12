@@ -20,16 +20,16 @@ function RecipeDetails() {
   const [favorite, setIsFavorite] = useState(isFavorite);
   const [recommendationsData, setRecommendationsData] = useState({ [pathname]: [{}] });
   const [doneRecipes, setDoneRecipes] = useState([]);
-  const timeNumber = 3000;
+  // const timeNumber = 3000;
   const fetchUrl = async (url, setFunc) => {
     const response = await fetch(url);
     const result = await response.json();
     setFunc(result);
     return result;
   };
-  if (message) {
-    setTimeout(() => setMessage(''), timeNumber);
-  }
+  // if (message) {
+  //   setTimeout(() => setMessage(''), timeNumber);
+  // }
   useEffect(() => {
     const updatingInformat = async () => {
       if (history.location.pathname.includes('meals')) {
@@ -93,8 +93,8 @@ function RecipeDetails() {
                 className="btn-share"
                 data-testid="share-btn"
                 onClick={ () => {
-                  navigator.clipboard.writeText(`http://localhost:3000${history.location.pathname}`)
-                    .then(() => setMessage('Link copied!'));
+                  navigator.clipboard.writeText(`http://localhost:3000${history.location.pathname}`);
+                  setMessage('Link copied!');
                 } }
               >
                 <img src={ shareIcon } alt="share" />
