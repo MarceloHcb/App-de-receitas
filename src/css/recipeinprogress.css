@@ -53,6 +53,11 @@
 
 } */
 
+.finish-button:disabled {
+  background-color: rgb(130, 148, 96);
+  color: black;
+}
+
 @media ( max-width : 675px ) {
 
   .title-progress {
@@ -63,4 +68,5 @@
     margin-bottom: 40px;
     width: 90%;
   }
+
 }

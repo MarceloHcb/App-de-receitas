@@ -82,7 +82,7 @@
 }
 
 .submit_buttom {
-  background-color: 4px 4px rgba(0, 0, 0, 0.2);
+  background-color: #fcc436;
   border: 0.5px solid hsl#464546;
   border-radius: 8px;
   color: hslrgb(73, 86, 61);

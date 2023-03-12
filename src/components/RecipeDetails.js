@@ -4,7 +4,8 @@ import CurrentRecipes from './CurrentRecipes';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import { LocalRecipesInProgress, LocalStorage } from '../helpers/localStorage';
+// import { LocalRecipesInProgress, LocalStorage } from '../helpers/localStorage';
+import { LocalStorage } from '../helpers/localStorage';
 
 function RecipeDetails() {
   const history = useHistory();
@@ -19,7 +20,6 @@ function RecipeDetails() {
   const [favorite, setIsFavorite] = useState(isFavorite);
   const [recommendationsData, setRecommendationsData] = useState({ [pathname]: [{}] });
   const [doneRecipes, setDoneRecipes] = useState([]);
-  const [inprogressRecipes, setInprogressRecipes] = useState([]);
   const timeNumber = 3000;
   const fetchUrl = async (url, setFunc) => {
     const response = await fetch(url);
@@ -56,6 +56,10 @@ function RecipeDetails() {
     .filter((el) => el.includes('strMeasure'));
   const measure = measureKeys.map((el) => data[pathname][0][el])
     .filter((el) => el !== null && el !== '');
+  // const inprogressRecipes = JSON.parse(localStorage
+  //   .getItem('inProgressRecipes'));
+  // { inprogressRecipes?.some(({ targetId }) => Number(targetId)
+  //    === Number(id)) ? 'Continue Recipe' : 'Start Recipe'; }
   return (
     <div>
       <div className="container-recipes">
@@ -75,15 +79,15 @@ function RecipeDetails() {
                 className="button-start"
                 data-testid="start-recipe-btn"
                 onClick={ () => {
-                  setInprogressRecipes([...inprogressRecipes, id]);
-                  LocalRecipesInProgress(...data[pathname], id);
                   history.push({
                     pathname: `${id}/in-progress`,
                     state: data,
                   });
                 } }
               >
-                {inprogressRecipes.includes(id) ? 'Start Recipe' : 'Continue Recipe'}
+                {/* { inprogressRecipes?.some((el) => Number(el.id)
+     === Number(id)) ? 'Continue Recipe' : 'Start Recipe'} */}
+                {'Continue Recipe' || 'Start Recipe'}
               </button>
               <button
                 className="btn-share"
