@@ -137,12 +137,12 @@ describe('Testa component Recipe Details', () => {
     const shareBtn = screen.getByTestId('share-btn');
     expect(shareBtn).toBeInTheDocument();
     // expect(shareBtn.src).toBe('http://localhost:3000/static/media/shareIcon.87def1bd1dff9af9263f046c3b9bd31a.svg');
-    // userEvent.click(shareBtn);
+    userEvent.click(shareBtn);
 
-    // await waitFor(() => {
-    //   const linkCopied = screen.getByText('link copied!');
-    //   expect(linkCopied).toBeInTheDocument();
-    // });
+    //  await waitFor(() => {
+    //    const linkCopied = screen.getByText('link copied!');
+    //    expect(linkCopied).toBeInTheDocument();
+    //  });
   });
   it('', () => {
     global.fetch = jest.fn(async () => ({
