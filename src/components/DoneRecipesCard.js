@@ -13,6 +13,8 @@ function DoneRecipesCard() {
       {doneRecipes?.map((el, index) => (
         <div key={ index }>
           <h3 data-testid={ `${index}-horizontal-name` }>{el.name}</h3>
+          {el.alcoholicOrNot
+          && <h4 data-testid={ `${index}-horizontal-top-text` }>{el.alcoholicOrNot}</h4>}
           <img src={ el.image } alt="" data-testid={ `${index}-horizontal-image` } />
           <h4 data-testid={ `${index}-horizontal-done-date` }>{el.doneDate}</h4>
           <h4 data-testid={ `${index}-horizontal-tags` }>{el.tags}</h4>
