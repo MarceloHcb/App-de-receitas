@@ -35,25 +35,6 @@ function SearchBar({ inputSearch }) {
       return global.alert('Your search must have only 1 (one) character');
     }
     return setUrl(`${url}search.php?f=${inputSearch}`);
-    // switch (results) {
-    // case 'Ingredient':
-    //   setUrl(`${url}filter.php?i=${inputSearch}`);
-
-    //   break;
-    // case 'Name':
-    //   setUrl(`${url}search.php?s=${inputSearch}`);
-
-    //   break;
-    // case 'First letter':
-    //   if (inputSearch.length !== 1) {
-    //     global.alert('Your search must have only 1 (one) character');
-    //   }
-    //   setUrl(`${url}search.php?f=${inputSearch}`);
-
-    //   break;
-    // default:
-    //   return true;
-    // }
   };
 
   return (

@@ -4,21 +4,21 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import '../css/recipeinprogress.css';
-import { LocalRecipesInProgress, LocalStorage } from '../helpers/localStorage';
+import { LocalRecipesDone,
+  LocalRecipesInProgress, LocalStorage } from '../helpers/localStorage';
 
 function RecipeInProgress() {
   const history = useHistory();
   const params = useParams();
   const pathname = history.location.pathname.includes('meals') ? 'meals' : 'drinks';
-
   const [message, setMessage] = useState('');
   const [data, setData] = useState([]);
   const getLocal = JSON.parse(localStorage.getItem('inProgressRecipes'))
-    ?.filter(({ id }) => id === params.id).map(({ targetId }) => targetId) || [];
-  const [checkeds, setChecked] = useState([...getLocal]);
-  const [loading, setLoading] = useState(true);
-
+    ?.filter(({ id }) => id === params.id);
+  const [checkeds, setChecked] = useState([
+    ...getLocal?.map(({ targetId }) => targetId) || []]);
   const { id } = params;
+  const [loading, setLoading] = useState(true);
   const localFavoritesRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const favorite = localFavoritesRecipes
     ?.some((el) => (el.id === id));
@@ -50,9 +50,16 @@ function RecipeInProgress() {
     };
     progressFetch();
   }, [id, pathname]);
-  console.log(resultData);
-  console.log(history.location.pathname.replace('/in-progress', ''));
+  const ingredientsList = resultData && Object.keys(resultData[0])
+    .filter((el) => el.includes('Ingredient'))
+    .filter((el) => resultData[0][el]);
+
+  const sameId = getLocal?.some((el) => el.id === id);
+  console.log(sameId);
   const isChecked = (el) => checkeds?.includes(el) || false;
+  console.log(ingredientsList);
+  const isDisabled = (checkeds?.length === ingredientsList?.length) && sameId;
+  console.log(isDisabled);
   return (
     <div className="container-progress">
       <h1 className="title-progress">RECIPES IN PROGRESS</h1>
@@ -90,6 +97,7 @@ function RecipeInProgress() {
                           <input
                             type="checkbox"
                             id={ el }
+                            name={ el }
                             checked={ isChecked(el) }
                             className="input-checkbox"
                             onChange={ handleIngredientsChange }
@@ -139,9 +147,14 @@ function RecipeInProgress() {
             <button
               type="button"
               data-testid="finish-recipe-btn"
-              className="button-start"
+              className="button-start finish-button"
+              onClick={ () => {
+                history.push('/done-recipes');
+                LocalRecipesDone(pathname, id);
+              } }
+              disabled={ !isDisabled }
             >
-              Finalizar Receita
+              Finish Recipe
 
             </button>
             <button
