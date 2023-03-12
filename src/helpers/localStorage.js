@@ -58,20 +58,21 @@ export const LocalRecipesInProgress = (checked, targetId, id) => {
   }
 };
 
-export const LocalRecipesDone = (pathname, id) => {
+export const LocalRecipesDone = (pathname, id, resultData) => {
   const recipeDone = JSON.parse(localStorage.getItem('doneRecipes'));
-  const recipeInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  const recipe = recipeInProgress?.filter((el) => el.id === id);
+  console.log(resultData);
+  const tags = resultData.strTags?.split(',') || [];
+  console.log(tags);
   const obj = {
     id,
-    type: pathname,
-    area: '',
-    category: '',
-    alcoholicOrNot: '',
-    name: recipe[0].name,
-    image: recipe[0].image,
-    doneDate: new Date().toLocaleDateString(),
-    tags: [],
+    nationality: resultData.strArea || '',
+    name: pathname === 'meals' ? resultData.strMeal : resultData.strDrink,
+    category: resultData.strCategory,
+    image: pathname === 'meals' ? resultData.strMealThumb : resultData.strDrinkThumb,
+    tags,
+    alcoholicOrNot: resultData.strAlcoholic || '',
+    type: pathname === 'meals' ? 'meal' : 'drink',
+    doneDate: new Date().toISOString(),
   };
   if (recipeDone === null) {
     localStorage.setItem('doneRecipes', JSON.stringify([obj]));

@@ -50,16 +50,13 @@ function RecipeInProgress() {
     };
     progressFetch();
   }, [id, pathname]);
+  console.log(resultData);
   const ingredientsList = resultData && Object.keys(resultData[0])
     .filter((el) => el.includes('Ingredient'))
     .filter((el) => resultData[0][el]);
-
   const sameId = getLocal?.some((el) => el.id === id);
-  console.log(sameId);
   const isChecked = (el) => checkeds?.includes(el) || false;
-  console.log(ingredientsList);
   const isDisabled = (checkeds?.length === ingredientsList?.length) && sameId;
-  console.log(isDisabled);
   return (
     <div className="container-progress">
       <h1 className="title-progress">RECIPES IN PROGRESS</h1>
@@ -150,7 +147,7 @@ function RecipeInProgress() {
               className="button-start finish-button"
               onClick={ () => {
                 history.push('/done-recipes');
-                LocalRecipesDone(pathname, id);
+                LocalRecipesDone(pathname, id, resultData[0]);
               } }
               disabled={ !isDisabled }
             >
