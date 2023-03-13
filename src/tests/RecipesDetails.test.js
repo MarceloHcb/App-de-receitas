@@ -120,6 +120,11 @@ describe('Testa component Recipe Details', () => {
     global.fetch = jest.fn(async () => ({
       json: async () => ({ meals: [mockedMealTest] }),
     }));
+    Object.defineProperty(navigator, 'clipboard', {
+      value: {
+        writeText: () => {},
+      },
+    });
     const { history } = renderWithRouter(
       <Provider>
         <App />
@@ -129,6 +134,8 @@ describe('Testa component Recipe Details', () => {
       history.push('/meals/52775');
     });
 
+    const startRecipes = screen.getByTestId('start-recipe-btn');
+    expect(startRecipes).toBeInTheDocument();
     const favRecipe = screen.getByTestId(favBtnId);
     expect(favRecipe).toBeInTheDocument();
     expect(favRecipe.src).toBe('http://localhost/whiteHeartIcon.svg');
@@ -136,13 +143,13 @@ describe('Testa component Recipe Details', () => {
     expect(favRecipe.src).toBe('http://localhost/blackHeartIcon.svg');
     const shareBtn = screen.getByTestId('share-btn');
     expect(shareBtn).toBeInTheDocument();
-    // expect(shareBtn.src).toBe('http://localhost:3000/static/media/shareIcon.87def1bd1dff9af9263f046c3b9bd31a.svg');
     userEvent.click(shareBtn);
 
-    //  await waitFor(() => {
-    //    const linkCopied = screen.getByText('link copied!');
-    //    expect(linkCopied).toBeInTheDocument();
-    //  });
+    const message = await screen.findByText('Link copied!');
+    expect(message).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.queryByText('Link copied!')).toBe(null);
+    }, { timeout: 4000 });
   });
   it('', () => {
     global.fetch = jest.fn(async () => ({
