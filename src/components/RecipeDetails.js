@@ -20,16 +20,16 @@ function RecipeDetails() {
   const [favorite, setIsFavorite] = useState(isFavorite);
   const [recommendationsData, setRecommendationsData] = useState({ [pathname]: [{}] });
   const [doneRecipes, setDoneRecipes] = useState([]);
-  // const timeNumber = 3000;
   const fetchUrl = async (url, setFunc) => {
     const response = await fetch(url);
     const result = await response.json();
     setFunc(result);
     return result;
   };
-  // if (message) {
-  //   setTimeout(() => setMessage(''), timeNumber);
-  // }
+  const timeNumber = 3000;
+  if (message) {
+    setTimeout(() => setMessage(''), timeNumber);
+  }
   useEffect(() => {
     const updatingInformat = async () => {
       if (history.location.pathname.includes('meals')) {

@@ -8,19 +8,24 @@ import '../css/favRecipeImg.css';
 function FavoriteRecipesCard({ index, favorite, removeFavRecipes }) {
   const history = useHistory();
   const { image, category, name, nationality, type, alcoholicOrNot, id } = favorite;
-  const [linkCopy, setLinkCopy] = useState(false);
+  const [message, setMessage] = useState('');
 
   const path = type === 'meal' ? 'meals' : 'drinks';
 
   const sharedButton = () => {
     if (type === 'drink') {
       navigator.clipboard.writeText(`http://localhost:3000/drinks/${id}`);
-      setLinkCopy(true);
+      setMessage('Link copied!');
     } else {
       navigator.clipboard.writeText(`http://localhost:3000/meals/${id}`);
-      setLinkCopy(true);
+      setMessage('Link copied!');
     }
   };
+
+  const timeNumber = 3000;
+  if (message) {
+    setTimeout(() => setMessage(''), timeNumber);
+  }
 
   return (
     <div>
@@ -53,7 +58,6 @@ function FavoriteRecipesCard({ index, favorite, removeFavRecipes }) {
             : alcoholicOrNot
         }
       </p>
-      {linkCopy ? <p>Link copied!</p> : ''}
       <button
         onClick={ sharedButton }
       >
@@ -62,6 +66,7 @@ function FavoriteRecipesCard({ index, favorite, removeFavRecipes }) {
           src={ shareIcon }
           alt=""
         />
+        <p style={ { color: 'red' } }>{message}</p>
       </button>
       <button
         onClick={ () => removeFavRecipes(id) }

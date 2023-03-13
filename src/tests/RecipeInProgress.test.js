@@ -39,9 +39,6 @@ describe('Testando Recipes in Progress', () => {
     expect(recipePhoto).toBeInTheDocument();
   });
   it('', async () => {
-    // global.fetch = jest.fn(async () => ({
-    //   json: async () => ({ meals: [mockLocalStorage] }),
-    // }));
     const { history, debug } = renderWithRouter(
       <Provider>
         <App />
@@ -83,8 +80,6 @@ describe('Testando Recipes in Progress', () => {
     debug();
   });
   it('', async () => {
-    // jest.useFakeTimers();
-    // jest.spyOn(global, 'setTimeout');
     Object.defineProperty(navigator, 'clipboard', {
       value: {
         writeText: () => {},
@@ -108,10 +103,12 @@ describe('Testando Recipes in Progress', () => {
     const shareBtn = await screen.findByTestId('share-btn');
     expect(shareBtn).toBeInTheDocument();
     userEvent.click(shareBtn);
-    // expect(setTimeout).toHaveBeenCalled();
 
     const message = await screen.findByText('Link copied!');
     expect(message).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.queryByText('Link copied!')).toBe(null);
+    }, { timeout: 4000 });
   });
   it('', async () => {
     const { history } = renderWithRouter(

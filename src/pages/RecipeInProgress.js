@@ -23,10 +23,10 @@ function RecipeInProgress() {
   const favorite = localFavoritesRecipes
     ?.some((el) => (el.id === id));
   const [isFavorite, setIsFavorite] = useState(favorite);
-  // const timeNumber = 3000;
-  // if (message) {
-  //   setTimeout(() => setMessage(''), timeNumber);
-  // }
+  const timeNumber = 3000;
+  if (message) {
+    setTimeout(() => setMessage(''), timeNumber);
+  }
   const resultData = data[pathname];
 
   const handleIngredientsChange = ({ target }) => {
