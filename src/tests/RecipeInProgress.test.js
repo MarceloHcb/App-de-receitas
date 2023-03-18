@@ -8,7 +8,6 @@ import fetch from '../../cypress/mocks/fetch';
 const mockLocalStorage = [{
   0: { id: '52771', targetId: '52771' },
 }];
-
 const pathMeals = '/meals/52977/in-progress';
 
 describe('Testando Recipes in Progress', () => {
@@ -125,8 +124,16 @@ describe('Testando Recipes in Progress', () => {
 
     const aquamarineDrink = await screen.findByText('Aquamarine');
     expect(aquamarineDrink);
-
+    const finishRecipe = await screen.findByTestId('finish-recipe-btn');
     const checkboxInput = await screen.findAllByRole('checkbox');
     expect(checkboxInput.length).toBe(3);
+    userEvent.click(checkboxInput[0]);
+    userEvent.click(checkboxInput[1]);
+    userEvent.click(checkboxInput[2]);
+    expect(finishRecipe).toBeEnabled();
+    userEvent.click(finishRecipe);
+    await waitFor(() => {
+      screen.findByTestId('0-horizontal-name');
+    }, { timeout: 4000 });
   });
 });

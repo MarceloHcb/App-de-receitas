@@ -62,9 +62,9 @@ function FavoriteRecipesCard({ index, favorite, removeFavRecipes }) {
         onClick={ sharedButton }
       >
         <img
-          data-testid={ `${index}-horizontal-share-btn` }
           src={ shareIcon }
-          alt=""
+          alt="share"
+          data-testid={ `${index}-horizontal-share-btn` }
         />
         <p style={ { color: 'red' } }>{message}</p>
       </button>
@@ -74,7 +74,7 @@ function FavoriteRecipesCard({ index, favorite, removeFavRecipes }) {
         <img
           data-testid={ `${index}-horizontal-favorite-btn` }
           src={ unFavoriteIcon }
-          alt=""
+          alt="favorite"
         />
       </button>
     </div>

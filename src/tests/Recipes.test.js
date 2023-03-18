@@ -8,6 +8,7 @@ import fetch from '../../cypress/mocks/fetch';
 describe('Testa componente Recipes', () => {
   beforeEach(() => {
     global.fetch = jest.fn(fetch);
+    jest.spyOn(global, 'alert');
   });
   afterEach(() => {
     jest.clearAllMocks();
@@ -95,7 +96,6 @@ describe('Testa componente Recipes', () => {
     expect(shakeBtn).toBeInTheDocument();
 
     userEvent.click(shakeBtn);
-
     const avalancheBtn = await screen.findByRole('button', {
       name: /avalanche/i,
     });

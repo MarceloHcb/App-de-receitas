@@ -16,16 +16,16 @@ export const LocalStorage = (
   const localDuplicateId = localFavoritesRecipes
     ?.some((el) => (el.id === id));
   if (localFavoritesRecipes && localDuplicateId) {
-    if (localFavoritesRecipes.some((el) => el.id === id)) {
-      localStorage.setItem('favoriteRecipes', JSON
-        .stringify(localFavoritesRecipes.filter((el) => el.id !== id)));
-      setIsFavorite(false);
-      return;
-    }
+    // if (localFavoritesRecipes.some((el) => el.id === id)) {
     localStorage.setItem('favoriteRecipes', JSON
       .stringify(localFavoritesRecipes.filter((el) => el.id !== id)));
     setIsFavorite(false);
     return;
+    // }
+    // localStorage.setItem('favoriteRecipes', JSON
+    //   .stringify(localFavoritesRecipes.filter((el) => el.id !== id)));
+    // setIsFavorite(false);
+    // return;
   }
   if (!localFavoritesRecipes) {
     localStorage.setItem('favoriteRecipes', JSON

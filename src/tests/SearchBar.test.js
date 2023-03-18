@@ -76,6 +76,31 @@ describe('Testa componente SearchBar', () => {
       expect(beefMustard).toBeInTheDocument();
     });
   });
+  it('Testando botão de ingrediente', async () => {
+    const { history } = renderWithRouter(
+      <Provider>
+        <App />
+      </Provider>,
+    );
+    act(() => {
+      history.push('/meals');
+    });
+
+    const searchTopBtn = screen.getByTestId(searchButtonId);
+    userEvent.click(searchTopBtn);
+
+    const searchInput = screen.getByTestId(searchInputId);
+    userEvent.type(searchInput, 'arrabiata');
+
+    const nameBtn = screen.getByTestId(nameRadioId);
+    userEvent.click(nameBtn);
+
+    const searchBar = screen.getByTestId(submitId);
+    userEvent.click(searchBar);
+    await waitFor(() => {
+      expect(history.location.pathname).toBe('/meals');
+    }, { timeout: 4000 });
+  });
   it('Testando global alert', async () => {
     const { history } = renderWithRouter(
       <Provider>
